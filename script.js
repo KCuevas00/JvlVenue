@@ -114,25 +114,138 @@ document.addEventListener('DOMContentLoaded', function () {
     text.textContent = isOpen ? '[Open for Inquiries]' : '[By Appointment]';
   }
 
-  // ---------- Hero video toggle ----------
-  var videoToggle = document.querySelector('.hero-video-toggle');
-  var heroVideo = document.querySelector('.hero-video--main');
-  var iconPause = document.querySelector('.icon-pause');
-  var iconPlay = document.querySelector('.icon-play');
-  
-  if (videoToggle && heroVideo) {
-    videoToggle.addEventListener('click', function () {
-      if (heroVideo.paused) {
-        heroVideo.play();
-        iconPause.style.display = 'block';
-        iconPlay.style.display = 'none';
-        videoToggle.setAttribute('aria-label', 'Pause video');
-      } else {
-        heroVideo.pause();
-        iconPause.style.display = 'none';
-        iconPlay.style.display = 'block';
-        videoToggle.setAttribute('aria-label', 'Play video');
+  // ---------- Multi-Video Hero Crossfade & Loop ----------
+  var layerA = document.getElementById('video-layer-a');
+  var layerB = document.getElementById('video-layer-b');
+  var heroVideoToggle = document.querySelector('.hero-video-toggle');
+
+  if (layerA && layerB) {
+    var playlist = [
+      { src: 'videos/venue-hero.mp4', poster: 'photos/venue-gold-black-setup.jpg' },
+      { src: 'videos/venue-tour.mp4', poster: 'photos/venue-round-tables-setup.jpg' }
+    ];
+
+    var layers = [
+      {
+        wrap: layerA,
+        backdrop: layerA.querySelector('.hero-video--backdrop'),
+        main: layerA.querySelector('.hero-video--main')
+      },
+      {
+        wrap: layerB,
+        backdrop: layerB.querySelector('.hero-video--backdrop'),
+        main: layerB.querySelector('.hero-video--main')
       }
+    ];
+
+    var currentPlaylistIdx = 0;
+    var activeLayerIdx = 0;
+    var isTransitioning = false;
+    var isUserPaused = false;
+    var FADE_LEAD_TIME = 1.2;
+
+    // Start playing layer A
+    layers[0].wrap.classList.add('is-active');
+    layers[0].backdrop.play().catch(function () {});
+    layers[0].main.play().catch(function () {});
+
+    // Preload layer B with next clip
+    prepareLayer(layers[1], playlist[1]);
+
+    function prepareLayer(layer, clip) {
+      if (layer.main.getAttribute('data-src') !== clip.src) {
+        layer.backdrop.src = clip.src;
+        layer.main.src = clip.src;
+        layer.main.poster = clip.poster;
+        layer.main.setAttribute('data-src', clip.src);
+        layer.backdrop.load();
+        layer.main.load();
+      }
+      layer.backdrop.currentTime = 0;
+      layer.main.currentTime = 0;
+    }
+
+    function checkVideoProgress() {
+      if (isUserPaused || isTransitioning) return;
+
+      var currentLayer = layers[activeLayerIdx];
+      var vid = currentLayer.main;
+
+      if (vid.duration && (vid.duration - vid.currentTime <= FADE_LEAD_TIME)) {
+        transitionToNext();
+      }
+    }
+
+    function transitionToNext() {
+      if (isTransitioning) return;
+      isTransitioning = true;
+      var nextPlaylistIdx = (currentPlaylistIdx + 1) % playlist.length;
+      var nextLayerIdx = 1 - activeLayerIdx;
+
+      var currentLayer = layers[activeLayerIdx];
+      var nextLayer = layers[nextLayerIdx];
+      var nextClip = playlist[nextPlaylistIdx];
+
+      prepareLayer(nextLayer, nextClip);
+
+      // Start next layer videos playing seamlessly underneath
+      nextLayer.backdrop.play().catch(function () {});
+      nextLayer.main.play().catch(function () {});
+
+      // Crossfade: nextLayer fades in to 1, currentLayer fades out to 0
+      nextLayer.wrap.classList.add('is-active');
+      currentLayer.wrap.classList.remove('is-active');
+
+      currentPlaylistIdx = nextPlaylistIdx;
+      activeLayerIdx = nextLayerIdx;
+
+      // After CSS fade completes (1200ms), pause the old layer
+      setTimeout(function () {
+        if (!isUserPaused) {
+          currentLayer.backdrop.pause();
+          currentLayer.main.pause();
+        }
+        isTransitioning = false;
+      }, 1250);
+    }
+
+    // Monitor playback on timeupdate of both main videos
+    layers[0].main.addEventListener('timeupdate', checkVideoProgress);
+    layers[1].main.addEventListener('timeupdate', checkVideoProgress);
+
+    // Fallback: in case timeupdate misses the exact window
+    layers[0].main.addEventListener('ended', function () {
+      if (!isTransitioning && activeLayerIdx === 0) transitionToNext();
     });
+    layers[1].main.addEventListener('ended', function () {
+      if (!isTransitioning && activeLayerIdx === 1) transitionToNext();
+    });
+
+    // Pause/Play toggle support for both layers
+    if (heroVideoToggle) {
+      var iconPause = heroVideoToggle.querySelector('.icon-pause');
+      var iconPlay = heroVideoToggle.querySelector('.icon-play');
+
+      heroVideoToggle.addEventListener('click', function () {
+        var active = layers[activeLayerIdx];
+        if (active.main.paused) {
+          isUserPaused = false;
+          active.backdrop.play().catch(function () {});
+          active.main.play().catch(function () {});
+          if (iconPause) iconPause.style.display = 'block';
+          if (iconPlay) iconPlay.style.display = 'none';
+          heroVideoToggle.setAttribute('aria-label', 'Pause video');
+        } else {
+          isUserPaused = true;
+          layers[0].backdrop.pause();
+          layers[0].main.pause();
+          layers[1].backdrop.pause();
+          layers[1].main.pause();
+          if (iconPause) iconPause.style.display = 'none';
+          if (iconPlay) iconPlay.style.display = 'block';
+          heroVideoToggle.setAttribute('aria-label', 'Play video');
+        }
+      });
+    }
   }
 });

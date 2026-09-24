@@ -58,12 +58,14 @@
 
 <section class="hero">
   <div class="hero-media">
-    <video class="hero-video hero-video--backdrop" autoplay muted loop playsinline aria-hidden="true">
-      <source src="videos/venue-hero.mp4" type="video/mp4">
-    </video>
-    <video class="hero-video hero-video--main" autoplay muted loop playsinline poster="photos/venue-gold-black-setup.jpg">
-      <source src="videos/venue-hero.mp4" type="video/mp4">
-    </video>
+    <div class="hero-video-wrap is-active" id="video-layer-a">
+      <video class="hero-video hero-video--backdrop" autoplay muted playsinline aria-hidden="true" src="videos/venue-hero.mp4"></video>
+      <video class="hero-video hero-video--main" autoplay muted playsinline poster="photos/venue-gold-black-setup.jpg" src="videos/venue-hero.mp4"></video>
+    </div>
+    <div class="hero-video-wrap" id="video-layer-b">
+      <video class="hero-video hero-video--backdrop" muted playsinline aria-hidden="true" src="videos/venue-tour.mp4"></video>
+      <video class="hero-video hero-video--main" muted playsinline poster="photos/venue-round-tables-setup.jpg" src="videos/venue-tour.mp4"></video>
+    </div>
     <button type="button" class="hero-video-toggle" aria-label="Pause video">
       <svg class="icon-pause" viewBox="0 0 24 24"><path d="M6 4h4v16H6V4zm8 0h4v16h-4V4z"/></svg>
       <svg class="icon-play" viewBox="0 0 24 24" style="display:none"><path d="M8 5v14l11-7z"/></svg>
