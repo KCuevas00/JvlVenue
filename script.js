@@ -17,13 +17,15 @@ document.addEventListener('DOMContentLoaded', function () {
   }
   
   if (header) {
-    window.addEventListener('scroll', function () {
-      if (window.scrollY > 50) {
+    function onScroll() {
+      if (window.scrollY > 30) {
         header.classList.add('scrolled');
       } else {
         header.classList.remove('scrolled');
       }
-    });
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
   }
 
   // ---------- Gallery lightbox ----------
