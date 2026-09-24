@@ -27,7 +27,10 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   // ---------- Gallery lightbox ----------
-  var galleryButtons = Array.prototype.slice.call(document.querySelectorAll('.gallery-grid button'));
+  var galleryButtons = Array.prototype.slice.call(document.querySelectorAll('.gallery-grid button')).filter(function (btn) {
+    var full = btn.getAttribute('data-full');
+    return full && full.trim().length > 0;
+  });
   if (galleryButtons.length) {
     var lightbox = document.querySelector('.lightbox');
     var lightboxImg = lightbox.querySelector('img');
@@ -40,12 +43,17 @@ document.addEventListener('DOMContentLoaded', function () {
     function show(index) {
       current = (index + galleryButtons.length) % galleryButtons.length;
       var btn = galleryButtons[current];
-      lightboxImg.src = btn.getAttribute('data-full');
-      lightboxImg.alt = btn.getAttribute('data-alt') || '';
-      lightboxCount.textContent = (current + 1) + ' / ' + galleryButtons.length;
+      var full = btn.getAttribute('data-full');
+      if (full) {
+        lightboxImg.src = full;
+        lightboxImg.alt = btn.getAttribute('data-alt') || '';
+        lightboxCount.textContent = (current + 1) + ' / ' + galleryButtons.length;
+      }
     }
 
     function open(index) {
+      var btn = galleryButtons[index];
+      if (!btn || !btn.getAttribute('data-full')) return;
       show(index);
       lightbox.classList.add('open');
       document.body.style.overflow = 'hidden';
@@ -101,7 +109,7 @@ document.addEventListener('DOMContentLoaded', function () {
     var hour = now.getHours() + now.getMinutes() / 60;
     var isOpen = hour >= 10 && hour < 18;
     dot.classList.add(isOpen ? 'is-open' : 'is-closed');
-    text.textContent = isOpen ? 'Open Now' : 'Closed Now';
+    text.textContent = isOpen ? '[Open for Inquiries]' : '[By Appointment]';
   }
 
   // ---------- Hero video toggle ----------
