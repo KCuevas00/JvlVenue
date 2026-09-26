@@ -27,3 +27,6 @@ As requested, all changed text and newly drafted venue copy has been enclosed in
 3. **Facebook Link**: `[https://www.facebook.com/placeholder]`.
 4. **Instagram Link**: `[https://www.instagram.com/placeholder]`.
 5. **Address**: Currently set to `[Plano, IL 60545]`. Add street address when ready.
+
+## Future Roadmap & Notes
+- **Spanish Language Version (EN/ES)**: Bilingual toggle or Spanish translation planned for all pages (venue copy, forms, booking info, and navigation). To be implemented when ready.
