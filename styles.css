@@ -242,8 +242,9 @@ header.site.menu-open .nav-toggle-bar:nth-child(3){transform:translateY(-7px) ro
 
 .desktop-only{display:none}
 
-/* extra block inside the nav drawer — phone number, mobile only */
+/* extra block inside the nav drawer — phone number and mobile elements */
 .nav-extra{display:none}
+.mobile-socials{display:none}
 
 /* ---------- Hero ---------- */
 .hero{
@@ -691,54 +692,97 @@ footer.site .wrap{padding-top:64px;padding-bottom:28px}
   .desktop-only{display:inline-flex}
 }
 @media (max-width:980px){
-  header.site{--header-h:76px}
-  .brand img{height:54px;width:54px}
-  header.site.scrolled .brand img{height:44px;width:44px}
-  nav.main-nav{position:fixed;inset:var(--header-h) 0 auto 0;background:rgba(18,18,18,.98);flex-direction:column;align-items:stretch;
-    padding:14px 16px 20px;border-bottom:1px solid rgba(255,255,255,.08);gap:2px;opacity:0;visibility:hidden;
-    transform:translateY(-6px);transition:opacity .2s ease, visibility .2s ease, transform .2s ease;
-    box-shadow:0 16px 30px rgba(0,0,0,.35);}
+  header.site{--header-h:68px}
+  header.site .wrap{
+    padding-top:8px;padding-bottom:8px;padding-left:16px;padding-right:16px;
+    gap:12px;
+    min-height:var(--header-h);
+  }
+  .brand{gap:10px}
+  .brand img{height:46px;width:46px;border-width:1.5px}
+  header.site.scrolled .brand img{height:38px;width:38px}
+  .brand-text-logo .brand-title{font-size:1.15rem;line-height:1.1}
+  .brand-text-logo .brand-sub{font-size:.54rem;letter-spacing:.08em;margin-top:1px}
+  .header-cta{gap:10px}
+  .desktop-only{display:none !important}
+  .nav-toggle{
+    display:inline-flex;width:40px;height:40px;border-radius:8px;
+    background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.14);
+    box-shadow:0 2px 8px rgba(0,0,0,.25);
+  }
+  .nav-toggle:hover,header.site.menu-open .nav-toggle{
+    background:rgba(255,255,255,.1);border-color:rgba(197,160,89,.4);
+  }
+  nav.main-nav{
+    position:fixed;inset:var(--header-h) 0 auto 0;
+    max-height:calc(100vh - var(--header-h));overflow-y:auto;
+    background:rgba(14,14,14,.98);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+    flex-direction:column;align-items:stretch;
+    padding:14px 18px 22px;border-bottom:1px solid rgba(197,160,89,.22);
+    gap:4px;opacity:0;visibility:hidden;
+    transform:translateY(-8px);transition:opacity .22s ease, visibility .22s ease, transform .22s ease;
+    box-shadow:0 20px 40px rgba(0,0,0,.6);
+  }
   nav.main-nav.open{opacity:1;visibility:visible;transform:translateY(0)}
-  /* Tapped items get a soft pill background instead of an underline.
-     Uses the same compact Space Grotesk voice as the buttons. */
+  /* Refined, readable navigation links */
   nav.main-nav a{
     font-family:'Space Grotesk',sans-serif;font-weight:600;
-    font-size:.82rem;letter-spacing:.02em;
-    width:100%;padding:10px 12px;border-radius:8px;border-bottom:0;
+    font-size:.92rem;letter-spacing:.03em;
+    width:100%;padding:11px 14px;border-radius:6px;border-bottom:0;
+    border-left:3px solid transparent;color:var(--gray-200);
+    transition:background .15s ease, color .15s ease, border-color .15s ease;
   }
   nav.main-nav a:hover,nav.main-nav a.active{
-    border-color:transparent;background:rgba(255,255,255,.08);
+    color:var(--gold-light);background:rgba(255,255,255,.05);
+    border-left-color:var(--gold);
   }
-  .nav-toggle{display:inline-flex}
-  .desktop-only{display:none}
   .nav-extra{
-    display:flex;flex-direction:column;gap:8px;width:100%;
-    margin-top:6px;padding-top:16px;border-top:1px solid rgba(255,255,255,.1);
+    display:flex;flex-direction:column;gap:10px;width:100%;
+    margin-top:8px;padding-top:14px;border-top:1px solid rgba(255,255,255,.08);
   }
   .nav-extra .phone-pill,
   .nav-extra .btn{
     width:100%;
     justify-content:center;
     text-align:center;
-    border-radius:10px;
-    padding:10px 14px;
-    font-size:.78rem;
+    border-radius:8px;
+    padding:11px 14px;
+    font-size:.84rem;
   }
   .nav-extra .phone-pill{
     color:var(--white);
-    background:rgba(255,255,255,.06);
-    border:1px solid rgba(255,255,255,.15);
+    background:rgba(255,255,255,.05);
+    border:1px solid rgba(255,255,255,.14);
     font-weight:600;
     font-family:'Space Grotesk',sans-serif;
     letter-spacing:.02em;
   }
-  .nav-extra .phone-pill svg{width:22px;height:22px;padding:5px}
+  .nav-extra .phone-pill svg{width:20px;height:20px;padding:4px}
   .nav-extra .btn{
     background:var(--gold);
     color:var(--ink);
     font-weight:700;
-    box-shadow:0 8px 20px rgba(0,0,0,.35);
+    box-shadow:0 6px 18px rgba(0,0,0,.35);
   }
+  .nav-extra .mobile-socials{
+    display:flex !important;
+    align-items:center;
+    justify-content:center;
+    gap:14px;
+    padding-top:4px;
+  }
+  .nav-extra .mobile-socials a{
+    width:38px;height:38px;padding:0;border-radius:50%;
+    border:1px solid rgba(255,255,255,.2);
+    display:flex;align-items:center;justify-content:center;
+    color:var(--white);background:rgba(255,255,255,.04);
+    border-left:1px solid rgba(255,255,255,.2);
+    transition:all .15s ease;
+  }
+  .nav-extra .mobile-socials a:hover{
+    background:rgba(197,160,89,.15);border-color:var(--gold);color:var(--gold-light);
+  }
+  .nav-extra .mobile-socials svg{width:18px;height:18px;fill:currentColor}
   .grid-3,.testimonials,.feature-row,.grid-4{grid-template-columns:repeat(2,1fr)}
   .footer-grid{grid-template-columns:1fr 1fr}
   .contact-grid{grid-template-columns:1fr}
@@ -775,4 +819,13 @@ footer.site .wrap{padding-top:64px;padding-bottom:28px}
   .footer-grid{grid-template-columns:1fr}
   .gallery-grid{grid-template-columns:repeat(2,1fr)}
   .section{padding:56px 0}
+}
+@media (max-width:420px){
+  header.site .wrap{padding-left:12px;padding-right:12px;gap:8px}
+  .brand{gap:8px}
+  .brand img{height:40px;width:40px}
+  header.site.scrolled .brand img{height:34px;width:34px}
+  .brand-text-logo .brand-title{font-size:1.02rem}
+  .brand-text-logo .brand-sub{font-size:.46rem;letter-spacing:.05em}
+  .nav-toggle{width:38px;height:38px}
 }
