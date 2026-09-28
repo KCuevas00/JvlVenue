@@ -50,16 +50,50 @@ body{
 /* ---------- Scroll Fade-In Animations ---------- */
 .reveal{
   opacity:0;
-  transition:opacity .55s ease;
+  transition:opacity .65s cubic-bezier(0.16, 1, 0.3, 1);
   will-change:opacity;
 }
 .reveal.is-visible{
   opacity:1;
 }
+
+/* Ensure interactive components retain smooth opacity fade-in alongside hover transitions */
+.event-card.reveal,
+.feature-card.reveal,
+.showcase-card.reveal,
+.inclusion-card.reveal,
+.faq-item.reveal{
+  transition:opacity .65s cubic-bezier(0.16, 1, 0.3, 1), transform .3s ease, box-shadow .3s ease, border-color .3s ease;
+}
+
+/* Staggered ripple effect for grid elements as user scrolls down */
+.event-grid .event-card.reveal:nth-child(3n+1){ transition-delay:0s; }
+.event-grid .event-card.reveal:nth-child(3n+2){ transition-delay:0.07s; }
+.event-grid .event-card.reveal:nth-child(3n+3){ transition-delay:0.14s; }
+
+.feature-card.reveal:nth-child(1){ transition-delay:0s; }
+.feature-card.reveal:nth-child(2){ transition-delay:0.07s; }
+.feature-card.reveal:nth-child(3){ transition-delay:0.14s; }
+.feature-card.reveal:nth-child(4){ transition-delay:0.21s; }
+
+.venue-showcase .showcase-card.reveal:nth-child(1){ transition-delay:0s; }
+.venue-showcase .showcase-card.reveal:nth-child(2){ transition-delay:0.1s; }
+.venue-showcase .showcase-card.reveal:nth-child(3){ transition-delay:0.2s; }
+
+/* Remove transition-delay on hover so cards respond instantly to mouse */
+.event-card.is-visible:hover,
+.feature-card.is-visible:hover,
+.showcase-card.is-visible:hover,
+.inclusion-card.is-visible:hover,
+.faq-item.is-visible:hover{
+  transition-delay:0s !important;
+}
+
 @media (prefers-reduced-motion: reduce){
   .reveal{
     opacity:1 !important;
     transition:none !important;
+    transition-delay:0s !important;
   }
 }
 img{max-width:100%;display:block}
@@ -521,7 +555,7 @@ nav.main-nav a:hover,nav.main-nav a.active{border-color:var(--gold);color:var(--
   justify-content:center;
   min-height:124px;
   overflow:hidden;
-  transition:transform .25s ease,box-shadow .25s ease,border-color .25s ease;
+  transition:opacity .65s cubic-bezier(0.16, 1, 0.3, 1), transform .25s ease, box-shadow .25s ease, border-color .25s ease;
 }
 .event-card:hover{
   transform:translateY(-3px);
@@ -646,7 +680,7 @@ nav.main-nav a:hover,nav.main-nav a.active{border-color:var(--gold);color:var(--
   flex-direction:column;
   align-items:center;
   justify-content:center;
-  transition:transform .3s ease, border-color .3s ease, box-shadow .3s ease;
+  transition:opacity .65s cubic-bezier(0.16, 1, 0.3, 1), transform .3s ease, border-color .3s ease, box-shadow .3s ease;
 }
 .feature-card:hover{
   transform:translateY(-8px);
@@ -735,7 +769,7 @@ nav.main-nav a:hover,nav.main-nav a.active{border-color:var(--gold);color:var(--
   border:1px solid #282828;
   border-radius:12px;
   overflow:hidden;
-  transition:border-color .25s ease, background .25s ease;
+  transition:opacity .65s cubic-bezier(0.16, 1, 0.3, 1), border-color .25s ease, background .25s ease;
 }
 .faq-item:hover{
   border-color:rgba(197,160,89,.35);
@@ -829,7 +863,7 @@ nav.main-nav a:hover,nav.main-nav a.active{border-color:var(--gold);color:var(--
   padding:28px 24px;
   display:flex;
   flex-direction:column;
-  transition:border-color .25s ease, transform .25s ease, box-shadow .25s ease;
+  transition:opacity .65s cubic-bezier(0.16, 1, 0.3, 1), border-color .25s ease, transform .25s ease, box-shadow .25s ease;
   position:relative;
 }
 .inclusion-card:hover{
@@ -988,7 +1022,7 @@ nav.main-nav a:hover,nav.main-nav a.active{border-color:var(--gold);color:var(--
   display:block;
   text-decoration:none;
   color:var(--white);
-  transition:transform .35s ease, box-shadow .35s ease, border-color .35s ease;
+  transition:opacity .65s cubic-bezier(0.16, 1, 0.3, 1), transform .35s ease, box-shadow .35s ease, border-color .35s ease;
 }
 .showcase-card:hover{
   transform:translateY(-5px);

@@ -1,4 +1,20 @@
+// Force browser to always start at the top on reload / refresh
+if ('scrollRestoration' in history) {
+  history.scrollRestoration = 'manual';
+}
+
+function forceScrollTop() {
+  if (!window.location.hash) {
+    window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+  }
+}
+
+forceScrollTop();
+window.addEventListener('beforeunload', forceScrollTop);
+window.addEventListener('load', forceScrollTop);
+
 document.addEventListener('DOMContentLoaded', function () {
+  forceScrollTop();
   var toggle = document.querySelector('.nav-toggle');
   var closeBtn = document.querySelector('.nav-close');
   var backdrop = document.querySelector('.nav-backdrop');
@@ -389,8 +405,8 @@ document.addEventListener('DOMContentLoaded', function () {
         }
       });
     }, {
-      rootMargin: '0px 0px -30px 0px',
-      threshold: 0.05
+      rootMargin: '0px 0px -40px 0px',
+      threshold: 0.04
     });
 
     revealElements.forEach(function (el) {
