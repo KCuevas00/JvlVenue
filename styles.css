@@ -1295,8 +1295,32 @@ header.site.scrolled .brand-text-logo .brand-sub{
 }
 
 /* ---------- Breadcrumb ---------- */
-.crumbs{font-size:.85rem;color:var(--gray-200);display:flex;gap:8px;align-items:center;margin-top:10px}
-.crumbs span{opacity:.6}
+.crumbs{
+  font-size:.85rem;
+  color:var(--gray-300);
+  display:flex;
+  gap:8px;
+  align-items:center;
+  margin-top:12px;
+}
+.crumbs a{
+  color:var(--white);
+  text-decoration:none;
+  transition:color .2s ease;
+}
+.crumbs a:hover{
+  color:var(--gold);
+}
+.crumbs span{
+  color:var(--gold-light);
+  opacity:1;
+  font-weight:600;
+}
+.crumbs .crumb-sep{
+  color:var(--gold);
+  opacity:.6;
+  font-weight:400;
+}
 
 /* ---------- Responsive ---------- */
 @media (min-width:981px){
