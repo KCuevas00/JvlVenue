@@ -368,7 +368,7 @@ document.addEventListener('DOMContentLoaded', function () {
     var revealSelector = [
       '.section .center',
       '.venue-showcase .showcase-card',
-      '.features-grid .feature-card',
+      '.feature-card',
       '.event-grid .event-card',
       '.testimonials .tcard',
       '.faq-wrap .faq-item',
@@ -383,7 +383,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Subtle cascading stagger delay for items inside grids
     var gridContainers = document.querySelectorAll(
-      '.venue-showcase, .features-grid, .event-grid, .testimonials, .inclusions-grid, .faq-wrap'
+      '.venue-showcase, .feature-row--large, .features-grid, .event-grid, .testimonials, .inclusions-grid, .faq-wrap'
     );
     gridContainers.forEach(function (container) {
       var children = Array.prototype.slice.call(container.children);
