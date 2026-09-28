@@ -381,18 +381,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
     var revealElements = document.querySelectorAll(revealSelector);
 
-    // Subtle cascading stagger delay for items inside grids
-    var gridContainers = document.querySelectorAll(
-      '.venue-showcase, .feature-row--large, .features-grid, .event-grid, .testimonials, .inclusions-grid, .faq-wrap'
-    );
-    gridContainers.forEach(function (container) {
-      var children = Array.prototype.slice.call(container.children);
-      children.forEach(function (child, i) {
-        var delay = Math.min(i * 0.06, 0.3);
-        child.style.transitionDelay = delay + 's';
-      });
-    });
-
     var revealObserver = new IntersectionObserver(function (entries, observer) {
       entries.forEach(function (entry) {
         if (entry.isIntersecting) {
@@ -401,8 +389,8 @@ document.addEventListener('DOMContentLoaded', function () {
         }
       });
     }, {
-      rootMargin: '0px 0px -40px 0px',
-      threshold: 0.06
+      rootMargin: '0px 0px -30px 0px',
+      threshold: 0.05
     });
 
     revealElements.forEach(function (el) {
