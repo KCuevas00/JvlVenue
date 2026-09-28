@@ -398,32 +398,7 @@ document.addEventListener('DOMContentLoaded', function () {
       revealObserver.observe(el);
     });
   }
-
-  // ---------- Font Exploration Switcher ----------
-  window.setFontPreview = function (opt) {
-    if (!opt || opt === 'compare') {
-      document.body.removeAttribute('data-font-preview');
-      try { localStorage.setItem('jvl_font_preview', 'compare'); } catch (e) {}
-    } else {
-      document.body.setAttribute('data-font-preview', opt);
-      try { localStorage.setItem('jvl_font_preview', opt); } catch (e) {}
-    }
-    var target = opt || 'compare';
-    document.querySelectorAll('.font-pill').forEach(function (pill) {
-      if (pill.getAttribute('data-font') === target) {
-        pill.classList.add('is-active');
-      } else {
-        pill.classList.remove('is-active');
-      }
-    });
-  };
-
-  try {
-    var savedFont = localStorage.getItem('jvl_font_preview');
-    if (savedFont && savedFont !== 'compare') {
-      window.setFontPreview(savedFont);
-    }
-  } catch (e) {}
 });
+
 
 
