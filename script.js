@@ -362,5 +362,54 @@ document.addEventListener('DOMContentLoaded', function () {
       };
     }
   });
+
+  // ---------- Scroll-triggered Fade In Animations ----------
+  if ('IntersectionObserver' in window) {
+    var revealSelector = [
+      '.section .center',
+      '.venue-showcase .showcase-card',
+      '.features-grid .feature-card',
+      '.event-grid .event-card',
+      '.testimonials .tcard',
+      '.faq-wrap .faq-item',
+      '.inclusions-grid .inclusion-card',
+      '.cta-band .wrap',
+      '.gallery-grid > *',
+      '.contact-grid > div',
+      '.venue-story-grid > div'
+    ].join(', ');
+
+    var revealElements = document.querySelectorAll(revealSelector);
+
+    // Subtle cascading stagger delay for items inside grids
+    var gridContainers = document.querySelectorAll(
+      '.venue-showcase, .features-grid, .event-grid, .testimonials, .inclusions-grid, .faq-wrap'
+    );
+    gridContainers.forEach(function (container) {
+      var children = Array.prototype.slice.call(container.children);
+      children.forEach(function (child, i) {
+        var delay = Math.min(i * 0.06, 0.3);
+        child.style.transitionDelay = delay + 's';
+      });
+    });
+
+    var revealObserver = new IntersectionObserver(function (entries, observer) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, {
+      rootMargin: '0px 0px -40px 0px',
+      threshold: 0.06
+    });
+
+    revealElements.forEach(function (el) {
+      el.classList.add('reveal');
+      revealObserver.observe(el);
+    });
+  }
 });
+
 
