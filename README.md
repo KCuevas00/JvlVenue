@@ -28,5 +28,13 @@ As requested, all changed text and newly drafted venue copy has been enclosed in
 4. **Instagram Link**: `[https://www.instagram.com/placeholder]`.
 5. **Address**: Currently set to `[Plano, IL 60545]`. Add street address when ready.
 
+## Client Specifications & Confirmed Operations (Sep 2026)
+1. **Pricing Policy**: No prices displayed publicly on the website. All packages and bookings direct visitors to submit an inquiry for a personalized rate estimate.
+2. **Rental Inclusions**: Every hall rental includes **tables, chairs, and tablecloths**.
+3. **Decorations Add-on**: Custom decorations are available for an **extra fee / additional price**.
+4. **Rental Hours**: Standard rental schedule is **5:00 PM – 11:30 PM**. Inquiries and tours remain by appointment.
+5. **Venue Rules & Contract**: Official house rules, guidelines, and policies are specified in the formal rental contract (to be provided from the contract).
+
 ## Future Roadmap & Notes
+- **Contract Rules Update**: Add specific rules from the contract when received from the client.
 - **Spanish Language Version (EN/ES)**: Bilingual toggle or Spanish translation planned for all pages (venue copy, forms, booking info, and navigation). To be implemented when ready.
