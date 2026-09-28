@@ -504,16 +504,65 @@ nav.main-nav a:hover,nav.main-nav a.active{border-color:var(--gold);color:var(--
 .card-cta a{font-weight:800;color:var(--gold);font-size:.85rem;letter-spacing:.02em;border-bottom:2px solid var(--gold)}
 .card-cta a:hover{color:var(--gold-light)}
 
-.event-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:22px 0}
-.event-card{
-  background:#171717;border-radius:12px;padding:16px 8px;text-align:center;
-  border:1px solid rgba(197,160,89,.22);box-shadow:0 4px 14px rgba(0,0,0,.4);
-  transition:transform .15s ease,box-shadow .15s ease,border-color .15s ease;
+.event-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:16px;
+  margin:28px 0 20px;
 }
-.event-card:hover{transform:translateY(-3px);border-color:var(--gold);box-shadow:0 8px 24px rgba(0,0,0,.6)}
-.event-card .ic{display:block;margin-bottom:6px;height:32px;width:32px;margin:0 auto 6px}
-.event-card .ic svg{width:100%;height:100%;fill:var(--gold)}
-.event-card .label{font-weight:700;font-size:.78rem;letter-spacing:.01em;color:#e4e4e4;line-height:1.25}
+.event-card{
+  background:#161616;
+  border-radius:14px;
+  padding:22px 14px;
+  text-align:center;
+  border:1px solid rgba(197,160,89,.22);
+  box-shadow:0 4px 16px rgba(0,0,0,.4);
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  min-height:114px;
+  transition:transform .2s ease,box-shadow .2s ease,border-color .2s ease,background .2s ease;
+}
+.event-card:hover{
+  transform:translateY(-3px);
+  border-color:var(--gold);
+  background:#1a1a1a;
+  box-shadow:0 8px 24px rgba(0,0,0,.6);
+}
+.event-card .ic{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  height:38px;
+  width:38px;
+  border-radius:50%;
+  background:rgba(197,160,89,.12);
+  border:1px solid rgba(197,160,89,.25);
+  margin-bottom:12px;
+  flex-shrink:0;
+  transition:transform .2s ease, background .2s ease, border-color .2s ease;
+}
+.event-card:hover .ic{
+  transform:scale(1.08);
+  background:rgba(197,160,89,.22);
+  border-color:var(--gold);
+}
+.event-card .ic svg{
+  width:19px;
+  height:19px;
+  fill:var(--gold);
+}
+.event-card .label{
+  font-family:'Space Grotesk',sans-serif;
+  font-weight:700;
+  font-size:.92rem;
+  letter-spacing:.02em;
+  color:#f2f2f2;
+  line-height:1.35;
+  text-align:center;
+  display:block;
+}
 .event-card--corporate,
 .event-card:last-child{grid-column:2}
 .br-mobile{display:none}
@@ -1522,10 +1571,11 @@ header.site.scrolled .brand-text-logo .brand-sub{
   .feature-row{grid-template-columns:repeat(2,1fr);gap:18px 12px}
   .feature-row .feature img{width:62px;height:62px;margin-bottom:7px;border-width:3px}
   .feature h4{font-size:.8rem;line-height:1.25;margin:0}
-  .event-grid{grid-template-columns:repeat(3,1fr);gap:8px}
-  .event-card{padding:12px 4px}
-  .event-card .ic{font-size:1.25rem}
-  .event-card .label{font-size:.68rem}
+  .event-grid{grid-template-columns:repeat(3,1fr);gap:10px;margin:20px 0 14px}
+  .event-card{padding:14px 6px;min-height:96px;border-radius:12px}
+  .event-card .ic{width:32px;height:32px;margin-bottom:8px}
+  .event-card .ic svg{width:16px;height:16px}
+  .event-card .label{font-size:.76rem;line-height:1.28}
   .footer-grid{grid-template-columns:1fr}
   .gallery-grid{grid-template-columns:repeat(2,1fr)}
   .gallery-grid button, .gallery-grid a{grid-column:auto !important;grid-row:auto !important}
