@@ -328,7 +328,8 @@ nav.main-nav a:hover,nav.main-nav a.active{border-color:var(--gold);color:var(--
 .hero-video-toggle{
   position:absolute;
   bottom:24px;
-  right:24px;
+  left:24px;
+  right:auto;
   z-index:10;
   width:42px;
   height:42px;
@@ -490,7 +491,10 @@ nav.main-nav a:hover,nav.main-nav a.active{border-color:var(--gold);color:var(--
 .event-card:hover{transform:translateY(-3px);border-color:var(--gold);box-shadow:0 8px 24px rgba(0,0,0,.6)}
 .event-card .ic{display:block;margin-bottom:6px;height:32px;width:32px;margin:0 auto 6px}
 .event-card .ic svg{width:100%;height:100%;fill:var(--gold)}
-.event-card .label{font-weight:700;font-size:.78rem;letter-spacing:.01em;color:#e4e4e4}
+.event-card .label{font-weight:700;font-size:.78rem;letter-spacing:.01em;color:#e4e4e4;line-height:1.25}
+.event-card--corporate,
+.event-card:last-child{grid-column:2}
+.br-mobile{display:none}
 
 .band{
   background:linear-gradient(135deg, #161616 0%, #201a10 50%, #161616 100%);
@@ -1112,7 +1116,7 @@ footer.site .wrap{padding-top:64px;padding-bottom:28px}
 
 /* ---------- Floating Contact / Text Chat Button ---------- */
 .floating-contact{
-  position:fixed;bottom:24px;left:24px;right:auto;z-index:100;
+  position:fixed;bottom:24px;right:24px;left:auto;z-index:100;
   width:58px;height:58px;
   background:#25D366; /* Generic messaging green hinting at SMS/text chat */
   border:2.5px solid rgba(255,255,255,.4);
@@ -1217,7 +1221,7 @@ header.site.scrolled .brand-text-logo .brand-sub{
   margin-top:1px;
 }
 @media (max-width:720px){
-  .floating-contact{bottom:20px;left:20px;right:auto;width:52px;height:52px}
+  .floating-contact{bottom:20px;right:20px;left:auto;width:52px;height:52px}
   .floating-contact svg{width:26px;height:26px}
   .scroll-indicator{display:block}
 }
@@ -1472,8 +1476,8 @@ header.site.scrolled .brand-text-logo .brand-sub{
   }
   .hero-video-toggle{
     bottom:16px;
-    right:16px;
-    left:auto;
+    left:16px;
+    right:auto;
     width:36px;
     height:36px;
   }
@@ -1486,6 +1490,7 @@ header.site.scrolled .brand-text-logo .brand-sub{
   .hero-ctas,.crumbs{justify-content:center}
 }
 @media (max-width:640px){
+  .br-mobile{display:inline}
   .faq-question{padding:16px 18px;font-size:.95rem}
   .faq-answer-inner{padding:0 18px 18px;font-size:.88rem}
   .grid-2{grid-template-columns:1fr}
