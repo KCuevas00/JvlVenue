@@ -386,6 +386,9 @@ document.addEventListener('DOMContentLoaded', function () {
       '.venue-showcase .showcase-card',
       '.feature-card',
       '.event-grid .event-card',
+      '.pillars-grid .pillar-card',
+      '.tabs-display-stage',
+      '.editorial-showcase-grid',
       '.testimonials .tcard',
       '.faq-wrap .faq-item',
       '.inclusions-grid .inclusion-card',
@@ -412,6 +415,90 @@ document.addEventListener('DOMContentLoaded', function () {
     revealElements.forEach(function (el) {
       el.classList.add('reveal');
       revealObserver.observe(el);
+    });
+  }
+
+  // ---------- Celebration Layout Switcher ----------
+  var switchBtns = document.querySelectorAll('.celebration-switcher-bar .sw-pill');
+  var celebrationViews = document.querySelectorAll('.celebration-view');
+
+  function setCelebrationView(viewId) {
+    if (!viewId) return;
+    switchBtns.forEach(function (btn) {
+      btn.classList.toggle('is-active', btn.getAttribute('data-view') === viewId);
+    });
+    celebrationViews.forEach(function (view) {
+      if (view.id === 'view-' + viewId) {
+        view.classList.add('is-active');
+        view.querySelectorAll('.reveal').forEach(function (r) {
+          r.classList.add('is-visible');
+        });
+      } else {
+        view.classList.remove('is-active');
+      }
+    });
+    try {
+      localStorage.setItem('jvl_celebration_layout', viewId);
+    } catch (e) {}
+  }
+
+  if (switchBtns.length) {
+    switchBtns.forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var view = this.getAttribute('data-view');
+        setCelebrationView(view);
+      });
+    });
+
+    var savedView = null;
+    try {
+      savedView = localStorage.getItem('jvl_celebration_layout');
+    } catch (e) {}
+    if (savedView && document.getElementById('view-' + savedView)) {
+      setCelebrationView(savedView);
+    }
+  }
+
+  // ---------- Option 3: Category Tabs Stage ----------
+  var tabPills = document.querySelectorAll('.tabs-subnav .tab-pill');
+  var tabPanels = document.querySelectorAll('.tabs-display-stage .tab-panel');
+
+  if (tabPills.length) {
+    tabPills.forEach(function (pill) {
+      pill.addEventListener('click', function () {
+        var tabId = this.getAttribute('data-tab');
+        tabPills.forEach(function (p) { p.classList.toggle('is-active', p === pill); });
+        tabPanels.forEach(function (panel) {
+          panel.classList.toggle('is-active', panel.id === 'panel-' + tabId);
+        });
+      });
+    });
+  }
+
+  // ---------- Option 4: Editorial List Live Frame ----------
+  var editorialItems = document.querySelectorAll('.editorial-list .editorial-item');
+  var liveImg = document.getElementById('ed-live-img');
+  var liveTitle = document.getElementById('ed-live-title');
+  var liveSubtitle = document.getElementById('ed-live-subtitle');
+  var liveDesc = document.getElementById('ed-live-desc');
+
+  if (editorialItems.length && liveImg) {
+    editorialItems.forEach(function (item) {
+      function activate() {
+        editorialItems.forEach(function (it) { it.classList.toggle('is-active', it === item); });
+        var img = item.getAttribute('data-img');
+        var title = item.getAttribute('data-title');
+        var sub = item.getAttribute('data-subtitle');
+        var desc = item.getAttribute('data-desc');
+
+        if (img) liveImg.src = img;
+        if (title && liveTitle) liveTitle.textContent = title;
+        if (sub && liveSubtitle) liveSubtitle.textContent = sub;
+        if (desc && liveDesc) liveDesc.textContent = desc;
+      }
+
+      item.addEventListener('mouseenter', activate);
+      item.addEventListener('click', activate);
     });
   }
 });
