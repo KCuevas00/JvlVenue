@@ -267,4 +267,100 @@ document.addEventListener('DOMContentLoaded', function () {
       });
     }
   }
+
+  // ---------- FAQ Smooth Slide Accordion ----------
+  var faqItems = document.querySelectorAll('.faq-item');
+  faqItems.forEach(function (item) {
+    var summary = item.querySelector('.faq-question');
+    var answer = item.querySelector('.faq-answer');
+    if (!summary || !answer) return;
+
+    if (item.hasAttribute('open')) {
+      item.classList.add('is-open');
+    }
+
+    var anim = null;
+    var isClosing = false;
+    var isOpening = false;
+
+    summary.addEventListener('click', function (e) {
+      e.preventDefault();
+
+      if (!answer.animate) {
+        if (item.hasAttribute('open')) {
+          item.removeAttribute('open');
+          item.classList.remove('is-open');
+        } else {
+          item.setAttribute('open', '');
+          item.classList.add('is-open');
+        }
+        return;
+      }
+
+      if (isClosing || !item.hasAttribute('open')) {
+        openItem();
+      } else if (isOpening || item.hasAttribute('open')) {
+        closeItem();
+      }
+    });
+
+    function closeItem() {
+      isClosing = true;
+      isOpening = false;
+      item.classList.remove('is-open');
+
+      var startHeight = answer.offsetHeight;
+      if (anim) anim.cancel();
+
+      anim = answer.animate({
+        height: [startHeight + 'px', '0px'],
+        opacity: [1, 0]
+      }, {
+        duration: 260,
+        easing: 'cubic-bezier(0.2, 0.9, 0.3, 1)'
+      });
+
+      anim.onfinish = function () {
+        item.removeAttribute('open');
+        anim = null;
+        isClosing = false;
+        answer.style.height = '';
+        answer.style.opacity = '';
+      };
+      anim.oncancel = function () {
+        isClosing = false;
+      };
+    }
+
+    function openItem() {
+      item.setAttribute('open', '');
+      item.classList.add('is-open');
+      isOpening = true;
+      isClosing = false;
+
+      var startHeight = answer.offsetHeight;
+      var endHeight = answer.scrollHeight;
+
+      if (anim) anim.cancel();
+
+      anim = answer.animate({
+        height: [(startHeight > 0 && startHeight < endHeight ? startHeight : 0) + 'px', endHeight + 'px'],
+        opacity: [0, 1]
+      }, {
+        duration: 280,
+        easing: 'cubic-bezier(0.16, 1, 0.3, 1)'
+      });
+
+      anim.onfinish = function () {
+        anim = null;
+        isOpening = false;
+        answer.style.height = '';
+        answer.style.opacity = '';
+      };
+      anim.oncancel = function () {
+        isOpening = false;
+      };
+    }
+  });
 });
+

@@ -622,11 +622,12 @@ nav.main-nav a:hover,nav.main-nav a.active{border-color:var(--gold);color:var(--
   border:1px solid #282828;
   border-radius:12px;
   overflow:hidden;
-  transition:border-color .2s ease, background .2s ease;
+  transition:border-color .25s ease, background .25s ease;
 }
 .faq-item:hover{
   border-color:rgba(197,160,89,.35);
 }
+.faq-item.is-open,
 .faq-item[open]{
   border-color:rgba(197,160,89,.4);
   background:#181818;
@@ -647,38 +648,57 @@ nav.main-nav a:hover,nav.main-nav a.active{border-color:var(--gold);color:var(--
 .faq-question::-webkit-details-marker{
   display:none;
 }
+.faq-question::marker{
+  display:none;
+  content:"";
+}
 .faq-icon{
-  width:28px;
-  height:28px;
+  width:32px;
+  height:32px;
   border-radius:50%;
   background:rgba(255,255,255,.05);
-  border:1px solid rgba(255,255,255,.12);
+  border:1px solid rgba(255,255,255,.14);
   display:flex;
   align-items:center;
   justify-content:center;
   color:var(--gold);
   flex-shrink:0;
   margin-left:16px;
-  transition:background .2s ease, border-color .2s ease;
+  transition:background .25s ease, border-color .25s ease, color .25s ease;
 }
 .faq-icon svg{
-  width:14px;
-  height:14px;
+  width:16px;
+  height:16px;
   stroke:currentColor;
   stroke-width:2.2;
   fill:none;
-  transition:transform .25s ease;
+  transition:transform .32s cubic-bezier(0.16, 1, 0.3, 1);
 }
+.faq-item:hover .faq-icon{
+  background:rgba(197,160,89,.12);
+  border-color:rgba(197,160,89,.35);
+  color:var(--gold-light);
+}
+.faq-item.is-open .faq-icon,
+.faq-item[open] .faq-icon{
+  background:rgba(197,160,89,.2);
+  border-color:rgba(197,160,89,.5);
+  color:var(--gold-light);
+}
+.faq-item.is-open .faq-icon svg,
 .faq-item[open] .faq-icon svg{
-  transform:rotate(45deg);
+  transform:rotate(180deg);
 }
 .faq-answer{
+  overflow:hidden;
+}
+.faq-answer-inner{
   padding:0 24px 22px;
   font-size:.92rem;
   line-height:1.65;
   color:var(--gray-300);
 }
-.faq-answer p{
+.faq-answer-inner p{
   margin:0;
 }
 
@@ -1466,7 +1486,7 @@ header.site.scrolled .brand-text-logo .brand-sub{
 }
 @media (max-width:640px){
   .faq-question{padding:16px 18px;font-size:.95rem}
-  .faq-answer{padding:0 18px 18px;font-size:.88rem}
+  .faq-answer-inner{padding:0 18px 18px;font-size:.88rem}
   .grid-2{grid-template-columns:1fr}
   .grid-3,.testimonials,.feature-row--large,.grid-4{grid-template-columns:1fr}
   .feature-row{grid-template-columns:repeat(2,1fr);gap:18px 12px}
