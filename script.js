@@ -430,7 +430,7 @@ document.addEventListener('DOMContentLoaded', function () {
     'Family Gatherings': 'Reuniones Familiares',
     'Graduations': 'Graduaciones',
     'Corporate Events': 'Eventos Corporativos',
-    'Sweet 16s': 'Sweet 16s'
+    'Sweet 16s': 'Fiestas Sweet 16'
   };
 
   var navMap = {
@@ -602,7 +602,70 @@ document.addEventListener('DOMContentLoaded', function () {
       }
     }
 
-    // 10. Venue.html inclusions
+    // 9.5 FAQ Section
+    var faqSec = document.querySelector('.faq-wrap');
+    if (faqSec) {
+      var faqHeader = faqSec.previousElementSibling;
+      if (faqHeader) {
+        var faqEye = faqHeader.querySelector('.eyebrow');
+        var faqH2 = faqHeader.querySelector('h2');
+        var faqP = faqHeader.querySelector('p');
+        if (faqEye) {
+          if (!faqEye.getAttribute('data-en')) faqEye.setAttribute('data-en', faqEye.textContent.trim());
+          faqEye.textContent = isEs ? 'Preguntas Comunes' : faqEye.getAttribute('data-en');
+        }
+        if (faqH2) {
+          if (!faqH2.getAttribute('data-en')) faqH2.setAttribute('data-en', faqH2.textContent.trim());
+          faqH2.textContent = isEs ? 'Preguntas Frecuentes' : faqH2.getAttribute('data-en');
+        }
+        if (faqP) {
+          if (!faqP.getAttribute('data-en')) faqP.setAttribute('data-en', faqP.textContent.trim());
+          faqP.textContent = isEs ? 'Todo lo que necesita saber sobre cómo reservar JVL Venue para su celebración.' : faqP.getAttribute('data-en');
+        }
+      }
+
+      var faqQuestions = isEs ? [
+        '¿Qué incluye la renta de nuestro salón?',
+        '¿Cómo funciona el precio y las cotizaciones?',
+        '¿Cuál es el horario habitual de renta?',
+        '¿Puedo traer comida y banquetes externos?',
+        '¿Cuál es la capacidad máxima de invitados?',
+        '¿Puedo agendar una visita en persona antes de reservar?'
+      ] : [
+        'What is included with our hall rental?',
+        'How does pricing work?',
+        'What are your standard rental hours?',
+        'Can I bring outside food and catering?',
+        'What is the maximum guest capacity?',
+        'Can I schedule an in-person tour before reserving?'
+      ];
+
+      var faqAnswers = isEs ? [
+        'Cada reservación del salón incluye el montaje de mesas, sillas cómodas y manteles limpios para hasta 75 invitados. También disfruta de acceso privado al salón interior climatizado y baños privados. La decoración personalizada (arcos de globos, fondos temáticos, centros de mesa) está disponible como un servicio opcional por un costo adicional.',
+        'Cada evento se cotiza de forma individual según el tipo de celebración, la fecha (días de semana vs. fines de semana) y sus necesidades de montaje. En lugar de paquetes rígidos, ofrecemos cotizaciones personalizadas para que solo pague por lo que su fiesta realmente necesita.',
+        'Nuestro horario estándar de renta para celebraciones es de 5:00 PM a 11:30 PM. Contáctenos para coordinar el horario de acceso para montaje y la disponibilidad de fechas.',
+        '¡Sí! Los anfitriones tienen total libertad de traer comida de afuera, especialidades familiares hechas en casa, pastel de celebración y bebidas sin costo adicional.',
+        'Nuestro salón tiene capacidad cómoda para hasta 75 invitados como máximo, manteniendo un ambiente íntimo y seguro en cumplimiento con las normas de seguridad contra incendios.',
+        'Sí, con gusto coordinamos recorridos y consultas en Plano, IL con previa cita. Simplemente envíe una solicitud de información o llámenos para fijar un horario conveniente para su visita.'
+      ] : [
+        'Every hall reservation includes setup tables, comfortable chairs, and fresh tablecloths for up to 75 guests. You also enjoy private access to the climate-controlled indoor salon and private restrooms. Custom decoration styling (balloon arches, themed backdrops, centerpieces) is available as an optional add-on for an extra fee.',
+        'Every event is priced individually around your specific event type, date (weekday vs. weekend), and custom setup needs. Rather than rigid pre-packaged tiers, we provide tailored quotes so you only pay for what your party actually needs.',
+        'Our standard celebration rental window is from 5:00 PM to 11:30 PM. Contact us to coordinate setup access and date availability.',
+        'Yes! Hosts have the freedom to bring outside catering, homemade family specialties, celebration cakes, and refreshments at no extra charge.',
+        'Our salon space comfortably accommodates up to 75 guests maximum to maintain an intimate, welcoming atmosphere and comply with fire safety guidelines.',
+        'Yes, walkthroughs and consultations in Plano, IL are gladly arranged by appointment. Simply submit an inquiry or give us a call to set up a convenient time to visit.'
+      ];
+
+      var faqItems = faqSec.querySelectorAll('.faq-item');
+      faqItems.forEach(function (item, idx) {
+        var qSpan = item.querySelector('.faq-question > span:first-child');
+        var aP = item.querySelector('.faq-answer-inner > p');
+        if (qSpan && faqQuestions[idx]) qSpan.textContent = faqQuestions[idx];
+        if (aP && faqAnswers[idx]) aP.textContent = faqAnswers[idx];
+      });
+    }
+
+    // 10. Venue.html inclusions & guidelines
     var incCards = document.querySelectorAll('.inclusion-card');
     if (incCards.length >= 4) {
       var incTitles = isEs ? ['Mesas', 'Sillas', 'Manteles', 'Decoraciones'] : ['Tables', 'Chairs', 'Tablecloths', 'Decorations'];
@@ -615,16 +678,51 @@ document.addEventListener('DOMContentLoaded', function () {
       });
     }
 
+    // Venue.html Guidelines Box
+    var vgCard = document.querySelector('.card[style*="border-left"]');
+    if (vgCard) {
+      var vgEye = vgCard.querySelector('.eyebrow');
+      var vgH3 = vgCard.querySelector('h3');
+      var vgPs = vgCard.querySelectorAll('p');
+      if (vgEye) {
+        if (!vgEye.getAttribute('data-en')) vgEye.setAttribute('data-en', vgEye.textContent.trim());
+        vgEye.textContent = isEs ? 'Información de Renta' : vgEye.getAttribute('data-en');
+      }
+      if (vgH3) {
+        if (!vgH3.getAttribute('data-en')) vgH3.setAttribute('data-en', vgH3.textContent.trim());
+        vgH3.textContent = isEs ? 'Pautas del Salón y Notas Importantes' : vgH3.getAttribute('data-en');
+      }
+      if (vgPs.length >= 6) {
+        var vgEsHtml = [
+          '<strong style="color:var(--white)">Horario de Renta:</strong> El horario regular para celebraciones vespertinas es de 5:00 PM a 11:30 PM. Consúltenos para disponibilidad de fechas y horario de entrada para montaje.',
+          '<strong style="color:var(--white)">Comodidades Incluidas:</strong> Cada renta incluye mesas, sillas y manteles limpios. Arreglos y decoraciones personalizadas (fondos fotográficos, arcos de globos) están disponibles con costo extra bajo solicitud.',
+          '<strong style="color:var(--white)">Capacidad de Invitados:</strong> Nuestro salón alberga cómodamente hasta un máximo de 75 invitados para garantizar la comodidad y cumplir con los códigos de seguridad contra incendios.',
+          '<strong style="color:var(--white)">Precios y Tarifas:</strong> De acuerdo con nuestra política del salón, no publicamos precios fijos estándar. Las cotizaciones se personalizan según su fecha, tipo de ocasión y requerimientos específicos de montaje.',
+          '<strong style="color:var(--white)">Comida y Bebidas Externas:</strong> Los anfitriones tienen total bienvenida para traer su propio servicio de banquete/catering, platillos familiares, pastel de celebración y bebidas.',
+          '<strong style="color:var(--white)">Contrato de Renta y Reglas:</strong> Las directrices oficiales, depósito y términos de reservación se detallan en el contrato formal provisto al solicitar la fecha.'
+        ];
+        vgPs.forEach(function (p, idx) {
+          if (!p.getAttribute('data-en-html')) p.setAttribute('data-en-html', p.innerHTML);
+          p.innerHTML = isEs ? vgEsHtml[idx] : p.getAttribute('data-en-html');
+        });
+      }
+    }
+
     // 11. CTA Band
     var ctaBandH2 = document.querySelector('.cta-band h2');
+    var ctaBandP = document.querySelector('.cta-band p');
     var ctaBandBtn = document.querySelector('.cta-band .btn');
     if (ctaBandH2) {
       if (!ctaBandH2.getAttribute('data-en')) ctaBandH2.setAttribute('data-en', ctaBandH2.textContent.trim());
-      ctaBandH2.textContent = isEs ? '¿Listo para planear su evento en Plano, IL?' : ctaBandH2.getAttribute('data-en');
+      ctaBandH2.textContent = isEs ? (document.querySelector('.faq-wrap') ? 'Precios según su Tipo de Evento y Fecha' : '¿Preguntas o Desea Consultar una Fecha?') : ctaBandH2.getAttribute('data-en');
+    }
+    if (ctaBandP) {
+      if (!ctaBandP.getAttribute('data-en')) ctaBandP.setAttribute('data-en', ctaBandP.textContent.trim());
+      ctaBandP.textContent = isEs ? 'Comuníquese con nosotros con su fecha estimada y número de invitados (hasta 75 personas). Le proporcionaremos una cotización personalizada.' : ctaBandP.getAttribute('data-en');
     }
     if (ctaBandBtn) {
       if (!ctaBandBtn.getAttribute('data-en')) ctaBandBtn.setAttribute('data-en', ctaBandBtn.textContent.trim());
-      ctaBandBtn.textContent = isEs ? 'Reservar o Consultar' : ctaBandBtn.getAttribute('data-en');
+      ctaBandBtn.textContent = isEs ? 'Solicitar Información' : ctaBandBtn.getAttribute('data-en');
     }
 
     // 12. Footer
