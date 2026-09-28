@@ -559,9 +559,6 @@ nav.main-nav a:hover,nav.main-nav a.active{border-color:var(--gold);color:var(--
   line-height:1.35;
   text-align:center;
   display:block;
-}
-.event-card--corporate,
-.event-card:last-child{grid-column:2}
 .br-mobile{display:none}
 
 .band{
