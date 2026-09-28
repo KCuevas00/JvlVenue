@@ -1,20 +1,39 @@
 document.addEventListener('DOMContentLoaded', function () {
   var toggle = document.querySelector('.nav-toggle');
+  var closeBtn = document.querySelector('.nav-close');
+  var backdrop = document.querySelector('.nav-backdrop');
   var nav = document.querySelector('.main-nav');
   var header = document.querySelector('header.site');
   
-  if (toggle && nav && header) {
-    toggle.addEventListener('click', function () {
-      nav.classList.toggle('open');
-      header.classList.toggle('menu-open');
-    });
+  function openNav() {
+    if (nav) nav.classList.add('open');
+    if (header) header.classList.add('menu-open');
+    if (backdrop) backdrop.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeNav() {
+    if (nav) nav.classList.remove('open');
+    if (header) header.classList.remove('menu-open');
+    if (backdrop) backdrop.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  if (toggle) toggle.addEventListener('click', openNav);
+  if (closeBtn) closeBtn.addEventListener('click', closeNav);
+  if (backdrop) backdrop.addEventListener('click', closeNav);
+
+  if (nav) {
     nav.querySelectorAll('a').forEach(function (a) {
-      a.addEventListener('click', function () { 
-        nav.classList.remove('open'); 
-        header.classList.remove('menu-open');
-      });
+      a.addEventListener('click', closeNav);
     });
   }
+
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && nav && nav.classList.contains('open')) {
+      closeNav();
+    }
+  });
   
   if (header) {
     function onScroll() {
@@ -111,7 +130,7 @@ document.addEventListener('DOMContentLoaded', function () {
     var hour = now.getHours() + now.getMinutes() / 60;
     var isOpen = hour >= 10 && hour < 18;
     dot.classList.add(isOpen ? 'is-open' : 'is-closed');
-    text.textContent = isOpen ? '[Open for Inquiries]' : '[By Appointment]';
+    text.textContent = isOpen ? 'Open for Inquiries' : 'By Appointment';
   }
 
   // ---------- Multi-Video Hero Crossfade & Loop ----------
