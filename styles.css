@@ -514,9 +514,18 @@ nav.main-nav a:hover,nav.main-nav a.active{border-color:var(--gold);color:var(--
   font-size:clamp(2.2rem, 5.2vw, 3.8rem);
   line-height:1.15;
   color:var(--white);
-  margin-bottom:12px;
+  margin-bottom:8px;
   letter-spacing:-.015em;
   text-shadow:0 2px 14px rgba(0,0,0,.85), 0 4px 28px rgba(0,0,0,.95);
+}
+.hero-inner--clean .hero-tagline{
+  font-family:'Outfit',sans-serif;
+  font-size:clamp(1.05rem, 2.2vw, 1.35rem);
+  font-weight:500;
+  color:var(--gold-light);
+  letter-spacing:.04em;
+  margin:0 auto 14px;
+  text-shadow:0 2px 12px rgba(0,0,0,.85), 0 4px 24px rgba(0,0,0,.95);
 }
 .hero-inner--clean .hero-subtitle{
   font-family:'Outfit',sans-serif;

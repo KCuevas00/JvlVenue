@@ -480,12 +480,17 @@ document.addEventListener('DOMContentLoaded', function () {
     var heroTitle = document.querySelector('.hero-title');
     if (heroTitle) {
       if (!heroTitle.getAttribute('data-en')) heroTitle.setAttribute('data-en', heroTitle.textContent.trim());
-      heroTitle.textContent = isEs ? 'Un Salón Íntimo Para Sus Celebraciones' : heroTitle.getAttribute('data-en');
+      heroTitle.textContent = isEs ? 'Celebre con Elegancia' : heroTitle.getAttribute('data-en');
+    }
+    var heroTagline = document.querySelector('.hero-tagline');
+    if (heroTagline) {
+      if (!heroTagline.getAttribute('data-en')) heroTagline.setAttribute('data-en', heroTagline.textContent.trim());
+      heroTagline.textContent = isEs ? 'Su Salón de Eventos Premier en Plano, IL' : heroTagline.getAttribute('data-en');
     }
     var heroSub = document.querySelector('.hero-subtitle');
     if (heroSub) {
       if (!heroSub.getAttribute('data-en')) heroSub.setAttribute('data-en', heroSub.textContent.trim());
-      heroSub.textContent = isEs ? 'Explore nuestro salón en Plano, IL para fiestas privadas, quinceañeras, cumpleaños, bautizos y reuniones familiares de hasta 75 invitados.' : heroSub.getAttribute('data-en');
+      heroSub.textContent = isEs ? 'Un salón de recepción íntimo y espacio para eventos privados de hasta 75 invitados' : heroSub.getAttribute('data-en');
     }
     var heroTour = document.querySelector('.hero-actions .btn--gold');
     if (heroTour) {
