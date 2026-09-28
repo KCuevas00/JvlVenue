@@ -386,9 +386,6 @@ document.addEventListener('DOMContentLoaded', function () {
       '.venue-showcase .showcase-card',
       '.feature-card',
       '.event-grid .event-card',
-      '.pillars-grid .pillar-card',
-      '.tabs-display-stage',
-      '.editorial-showcase-grid',
       '.testimonials .tcard',
       '.faq-wrap .faq-item',
       '.inclusions-grid .inclusion-card',
@@ -418,88 +415,248 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
-  // ---------- Celebration Layout Switcher ----------
-  var switchBtns = document.querySelectorAll('.celebration-switcher-bar .sw-pill');
-  var celebrationViews = document.querySelectorAll('.celebration-view');
+  // ---------- Bilingual English / Spanish Switcher ----------
+  var currentLang = 'en';
+  try {
+    currentLang = localStorage.getItem('jvl_language') || 'en';
+  } catch (e) {}
 
-  function setCelebrationView(viewId) {
-    if (!viewId) return;
-    switchBtns.forEach(function (btn) {
-      btn.classList.toggle('is-active', btn.getAttribute('data-view') === viewId);
-    });
-    celebrationViews.forEach(function (view) {
-      if (view.id === 'view-' + viewId) {
-        view.classList.add('is-active');
-        view.querySelectorAll('.reveal').forEach(function (r) {
-          r.classList.add('is-visible');
-        });
+  var eventCardMap = {
+    'Birthdays': 'Cumpleaños',
+    'Quinceañeras': 'Quinceañeras',
+    'Baptisms': 'Bautizos',
+    'First Communions': 'Primeras Comuniones',
+    'Showers & Receptions': 'Showers y Recepciones',
+    'Family Gatherings': 'Reuniones Familiares',
+    'Graduations': 'Graduaciones',
+    'Corporate Events': 'Eventos Corporativos',
+    'Sweet 16s': 'Sweet 16s'
+  };
+
+  var navMap = {
+    'Home': 'Inicio',
+    'The Venue': 'El Salón',
+    'Gallery': 'Galería',
+    'Contact': 'Contacto'
+  };
+
+  function applyLanguage(lang) {
+    var isEs = lang === 'es';
+    document.documentElement.lang = isEs ? 'es' : 'en';
+
+    // 1. Update button labels & appearance
+    var toggleBtns = document.querySelectorAll('.lang-toggle-btn');
+    toggleBtns.forEach(function (btn) {
+      var flag = btn.querySelector('.lang-flag-icon');
+      var label = btn.querySelector('.lang-text-label');
+      if (isEs) {
+        btn.classList.add('is-spanish');
+        if (flag) flag.textContent = '🇺🇸';
+        if (label) label.textContent = 'English';
+        btn.setAttribute('aria-label', 'Switch language to English');
       } else {
-        view.classList.remove('is-active');
+        btn.classList.remove('is-spanish');
+        if (flag) flag.textContent = '🇲🇽';
+        if (label) label.textContent = 'Español';
+        btn.setAttribute('aria-label', 'Cambiar idioma a Español');
       }
     });
-    try {
-      localStorage.setItem('jvl_celebration_layout', viewId);
-    } catch (e) {}
-  }
 
-  if (switchBtns.length) {
-    switchBtns.forEach(function (btn) {
-      btn.addEventListener('click', function () {
-        var view = this.getAttribute('data-view');
-        setCelebrationView(view);
-      });
+    // 2. Navigation links
+    document.querySelectorAll('nav.main-nav .nav-links-wrap a').forEach(function (a) {
+      if (!a.getAttribute('data-en')) a.setAttribute('data-en', a.textContent.trim());
+      var en = a.getAttribute('data-en');
+      a.textContent = isEs ? (navMap[en] || en) : en;
     });
 
-    var savedView = null;
-    try {
-      savedView = localStorage.getItem('jvl_celebration_layout');
-    } catch (e) {}
-    if (savedView && document.getElementById('view-' + savedView)) {
-      setCelebrationView(savedView);
+    // 3. CTA Buttons
+    document.querySelectorAll('.btn--nav-cta, .header-cta .btn--white').forEach(function (b) {
+      if (!b.getAttribute('data-en')) b.setAttribute('data-en', b.textContent.trim());
+      var en = b.getAttribute('data-en');
+      b.textContent = isEs ? 'Reservar Ahora' : en;
+    });
+
+    // 4. Hero section (Home)
+    var heroTitle = document.querySelector('.hero-title');
+    if (heroTitle) {
+      if (!heroTitle.getAttribute('data-en')) heroTitle.setAttribute('data-en', heroTitle.textContent.trim());
+      heroTitle.textContent = isEs ? 'Un Salón Íntimo Para Sus Celebraciones' : heroTitle.getAttribute('data-en');
     }
-  }
+    var heroSub = document.querySelector('.hero-subtitle');
+    if (heroSub) {
+      if (!heroSub.getAttribute('data-en')) heroSub.setAttribute('data-en', heroSub.textContent.trim());
+      heroSub.textContent = isEs ? 'Explore nuestro salón en Plano, IL para fiestas privadas, quinceañeras, cumpleaños, bautizos y reuniones familiares de hasta 75 invitados.' : heroSub.getAttribute('data-en');
+    }
+    var heroTour = document.querySelector('.hero-actions .btn--gold');
+    if (heroTour) {
+      if (!heroTour.getAttribute('data-en')) heroTour.setAttribute('data-en', heroTour.textContent.trim());
+      heroTour.textContent = isEs ? 'Agendar una Visita' : heroTour.getAttribute('data-en');
+    }
+    var heroAvail = document.querySelector('.hero-actions .btn--white');
+    if (heroAvail) {
+      if (!heroAvail.getAttribute('data-en')) heroAvail.setAttribute('data-en', heroAvail.textContent.trim());
+      heroAvail.textContent = isEs ? 'Verificar Disponibilidad' : heroAvail.getAttribute('data-en');
+    }
 
-  // ---------- Option 3: Category Tabs Stage ----------
-  var tabPills = document.querySelectorAll('.tabs-subnav .tab-pill');
-  var tabPanels = document.querySelectorAll('.tabs-display-stage .tab-panel');
-
-  if (tabPills.length) {
-    tabPills.forEach(function (pill) {
-      pill.addEventListener('click', function () {
-        var tabId = this.getAttribute('data-tab');
-        tabPills.forEach(function (p) { p.classList.toggle('is-active', p === pill); });
-        tabPanels.forEach(function (panel) {
-          panel.classList.toggle('is-active', panel.id === 'panel-' + tabId);
-        });
-      });
-    });
-  }
-
-  // ---------- Option 4: Editorial List Live Frame ----------
-  var editorialItems = document.querySelectorAll('.editorial-list .editorial-item');
-  var liveImg = document.getElementById('ed-live-img');
-  var liveTitle = document.getElementById('ed-live-title');
-  var liveSubtitle = document.getElementById('ed-live-subtitle');
-  var liveDesc = document.getElementById('ed-live-desc');
-
-  if (editorialItems.length && liveImg) {
-    editorialItems.forEach(function (item) {
-      function activate() {
-        editorialItems.forEach(function (it) { it.classList.toggle('is-active', it === item); });
-        var img = item.getAttribute('data-img');
-        var title = item.getAttribute('data-title');
-        var sub = item.getAttribute('data-subtitle');
-        var desc = item.getAttribute('data-desc');
-
-        if (img) liveImg.src = img;
-        if (title && liveTitle) liveTitle.textContent = title;
-        if (sub && liveSubtitle) liveSubtitle.textContent = sub;
-        if (desc && liveDesc) liveDesc.textContent = desc;
+    // 5. Why Choose section
+    var chooseText = document.querySelector('.feature-lead-text');
+    if (chooseText) {
+      var h2 = chooseText.previousElementSibling;
+      var eyebrow = h2 ? h2.previousElementSibling : null;
+      if (eyebrow && eyebrow.classList.contains('eyebrow')) {
+        if (!eyebrow.getAttribute('data-en')) eyebrow.setAttribute('data-en', eyebrow.textContent.trim());
+        eyebrow.textContent = isEs ? 'Por Qué Elegir JVL Venue' : eyebrow.getAttribute('data-en');
       }
+      if (h2) {
+        if (!h2.getAttribute('data-en')) h2.setAttribute('data-en', h2.textContent.trim());
+        h2.textContent = isEs ? 'Un Espacio Íntimo Para Eventos Inolvidables' : h2.getAttribute('data-en');
+      }
+      if (!chooseText.getAttribute('data-en')) chooseText.setAttribute('data-en', chooseText.textContent.trim());
+      chooseText.textContent = isEs ? '¿Busca un salón cómodo y privado para su próxima reunión? JVL Venue ofrece un espacio versátil y limpio, diseñado para adaptarse a su fiesta con opciones flexibles de montaje.' : chooseText.getAttribute('data-en');
+    }
 
-      item.addEventListener('mouseenter', activate);
-      item.addEventListener('click', activate);
+    // 6. Feature stats row
+    var featCards = document.querySelectorAll('.feature-card');
+    if (featCards.length >= 4) {
+      var fStats = isEs ? ['Hasta 75 Invitados', '5:00 PM – 11:30 PM', 'Mesas, Sillas y Manteles', 'Área de Plano, IL'] : ['Max 75 Guests', '5:00 PM – 11:30 PM', 'Tables, Chairs & Linens', 'Plano, IL Area'];
+      var fLabels = isEs ? ['Capacidad íntima del salón', 'Horario de renta', 'Incluidos con la renta', 'Ubicación conveniente'] : ['Intimate salon capacity', 'Rental hours', 'Included', 'Convenient location'];
+      featCards.forEach(function (fc, idx) {
+        var stat = fc.querySelector('.feature-stat');
+        var label = fc.querySelector('.feature-label');
+        if (stat && fStats[idx]) stat.textContent = fStats[idx];
+        if (label && fLabels[idx]) label.textContent = fLabels[idx];
+      });
+    }
+
+    // 7. Event cards (9 tiles)
+    document.querySelectorAll('.event-grid .event-card').forEach(function (card) {
+      var label = card.querySelector('.label');
+      if (label) {
+        var cleanEn = label.getAttribute('data-en');
+        if (!cleanEn) {
+          cleanEn = label.textContent.replace(/\s+/g, ' ').trim();
+          label.setAttribute('data-en', cleanEn);
+        }
+        if (isEs) {
+          label.textContent = eventCardMap[cleanEn] || cleanEn;
+        } else {
+          label.textContent = cleanEn;
+        }
+      }
     });
+
+    // 8. Gallery Showcase cards
+    var scCards = document.querySelectorAll('.showcase-card');
+    if (scCards.length >= 3) {
+      var scTitles = isEs ? [
+        'Distribución de Mesas y Sillas Incluida',
+        'Ambiente Nocturno e Ideas de Decoración',
+        'Escenarios y Decoraciones Especiales'
+      ] : [
+        'Included Hall & Seating Layout',
+        'Evening Atmosphere & Styling Ideas',
+        'Celebration Backdrops & Feature Setups'
+      ];
+      var scDescs = isEs ? [
+        'Cada reservación incluye mesas redondas estándar, sillas cómodas y manteles limpios para hasta 75 invitados.',
+        'Muestra de cena nocturna. Los manteles básicos están incluidos; caminos de mesa y detalles especiales se pueden agregar por costo adicional o traerlos usted mismo.',
+        'Espacio flexible listo para mesas de postres y entretenimiento. Arcos de globos y escenarios fotográficos están disponibles como servicio adicional.'
+      ] : [
+        'Every booking includes standard round banquet tables, comfortable chairs, and crisp tablecloths arranged for up to 75 guests.',
+        'Sample evening dinner setting. While basic linens are included, specialty runners, chargers, and custom accent decor can be added for an extra fee or brought in by you.',
+        'Flexible open floor ready for dessert stations and entertainment. Custom balloon styling, themed backdrops, and specialty decor are available as an optional add-on.'
+      ];
+      scCards.forEach(function (sc, idx) {
+        var h3 = sc.querySelector('h3');
+        var p = sc.querySelector('p');
+        var tag = sc.querySelector('.showcase-tag');
+        if (h3 && scTitles[idx]) h3.textContent = scTitles[idx];
+        if (p && scDescs[idx]) p.textContent = scDescs[idx];
+        if (tag) tag.innerHTML = isEs ? 'Ver Galería Completa &rarr;' : 'View Full Gallery &rarr;';
+      });
+      var showcaseBtn = document.querySelector('.venue-showcase-section .btn--gold');
+      if (showcaseBtn) {
+        if (!showcaseBtn.getAttribute('data-en')) showcaseBtn.setAttribute('data-en', showcaseBtn.textContent.trim());
+        showcaseBtn.textContent = isEs ? 'Explorar Galería Completa' : showcaseBtn.getAttribute('data-en');
+      }
+    }
+
+    // 9. Testimonials & Feedback
+    var feedbackSec = document.querySelector('.testimonials');
+    if (feedbackSec && feedbackSec.previousElementSibling) {
+      var fbHeader = feedbackSec.previousElementSibling;
+      var fbEyebrow = fbHeader.querySelector('.eyebrow');
+      var fbH2 = fbHeader.querySelector('h2');
+      var fbP = fbHeader.querySelector('p');
+      if (fbEyebrow) {
+        if (!fbEyebrow.getAttribute('data-en')) fbEyebrow.setAttribute('data-en', fbEyebrow.textContent.trim());
+        fbEyebrow.textContent = isEs ? 'Opiniones de Clientes' : fbEyebrow.getAttribute('data-en');
+      }
+      if (fbH2) {
+        if (!fbH2.getAttribute('data-en')) fbH2.setAttribute('data-en', fbH2.textContent.trim());
+        fbH2.textContent = isEs ? 'Lo Que Dicen Anfitriones e Invitados' : fbH2.getAttribute('data-en');
+      }
+      if (fbP) {
+        if (!fbP.getAttribute('data-en')) fbP.setAttribute('data-en', fbP.textContent.trim());
+        fbP.textContent = isEs ? 'Opiniones reales de familias y anfitriones de eventos.' : fbP.getAttribute('data-en');
+      }
+    }
+
+    // 10. Venue.html inclusions
+    var incCards = document.querySelectorAll('.inclusion-card');
+    if (incCards.length >= 4) {
+      var incTitles = isEs ? ['Mesas', 'Sillas', 'Manteles', 'Decoraciones'] : ['Tables', 'Chairs', 'Tablecloths', 'Decorations'];
+      var incBadges = isEs ? ['Incluido', 'Incluido', 'Incluido', 'Disponible Costo Extra'] : ['Included', 'Included', 'Included', 'Available Extra Fee'];
+      incCards.forEach(function (inc, idx) {
+        var t = inc.querySelector('.inclusion-title');
+        var b = inc.querySelector('.inclusion-badge');
+        if (t && incTitles[idx]) t.textContent = incTitles[idx];
+        if (b && incBadges[idx]) b.textContent = incBadges[idx];
+      });
+    }
+
+    // 11. CTA Band
+    var ctaBandH2 = document.querySelector('.cta-band h2');
+    var ctaBandBtn = document.querySelector('.cta-band .btn');
+    if (ctaBandH2) {
+      if (!ctaBandH2.getAttribute('data-en')) ctaBandH2.setAttribute('data-en', ctaBandH2.textContent.trim());
+      ctaBandH2.textContent = isEs ? '¿Listo para planear su evento en Plano, IL?' : ctaBandH2.getAttribute('data-en');
+    }
+    if (ctaBandBtn) {
+      if (!ctaBandBtn.getAttribute('data-en')) ctaBandBtn.setAttribute('data-en', ctaBandBtn.textContent.trim());
+      ctaBandBtn.textContent = isEs ? 'Reservar o Consultar' : ctaBandBtn.getAttribute('data-en');
+    }
+
+    // 12. Footer
+    var footerBrandP = document.querySelector('.footer-brand + p');
+    if (footerBrandP) {
+      if (!footerBrandP.getAttribute('data-en')) footerBrandP.setAttribute('data-en', footerBrandP.textContent.trim());
+      footerBrandP.textContent = isEs ? 'Un salón íntimo de fiestas y recepciones en Plano, IL. Espacio versátil para celebraciones de hasta 75 invitados.' : footerBrandP.getAttribute('data-en');
+    }
+    var footerH4s = document.querySelectorAll('.footer-grid h4');
+    if (footerH4s.length >= 3) {
+      var f4Titles = isEs ? ['Enlaces Rápidos', 'Contacto', 'Horario de Renta y Consultas'] : ['Quick Links', 'Contact', 'Rental Hours & Inquiries'];
+      footerH4s.forEach(function (h4, idx) {
+        if (f4Titles[idx]) h4.textContent = f4Titles[idx];
+      });
+    }
+
+    try {
+      localStorage.setItem('jvl_language', lang);
+    } catch (e) {}
+  }
+
+  // Toggle button event listeners
+  document.querySelectorAll('.lang-toggle-btn').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      currentLang = currentLang === 'es' ? 'en' : 'es';
+      applyLanguage(currentLang);
+    });
+  });
+
+  // Apply on initial load if saved language is Spanish
+  if (currentLang === 'es') {
+    applyLanguage('es');
   }
 });
 
