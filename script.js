@@ -533,6 +533,26 @@ document.addEventListener('DOMContentLoaded', function () {
       });
     }
 
+    // 6.5. Event grid header
+    var egHeader = document.querySelector('.event-grid-header');
+    if (egHeader) {
+      var egEyebrow = egHeader.querySelector('.eyebrow');
+      var egTitle = egHeader.querySelector('.event-grid-title');
+      var egSub = egHeader.querySelector('.event-grid-sub');
+      if (egEyebrow) {
+        if (!egEyebrow.getAttribute('data-en')) egEyebrow.setAttribute('data-en', egEyebrow.textContent.trim());
+        egEyebrow.textContent = isEs ? 'Celebraciones Que Organizamos' : egEyebrow.getAttribute('data-en');
+      }
+      if (egTitle) {
+        if (!egTitle.getAttribute('data-en')) egTitle.setAttribute('data-en', egTitle.textContent.trim());
+        egTitle.textContent = isEs ? 'Salón Versátil Para Cada Momento Especial' : egTitle.getAttribute('data-en');
+      }
+      if (egSub) {
+        if (!egSub.getAttribute('data-en')) egSub.setAttribute('data-en', egSub.textContent.trim());
+        egSub.textContent = isEs ? 'Desde reuniones familiares tradicionales hasta fiestas privadas modernas, nuestro salón se adapta perfectamente a su evento.' : egSub.getAttribute('data-en');
+      }
+    }
+
     // 7. Event cards (9 tiles)
     document.querySelectorAll('.event-grid .event-card').forEach(function (card) {
       var label = card.querySelector('.label');
