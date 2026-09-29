@@ -142,7 +142,13 @@
     <div>
       <span class="eyebrow">Request Information</span>
       <h2>Inquire About Your Date</h2>
-      <form class="contact-form" action="mailto:jvlvenue@gmail.com" method="post" enctype="text/plain">
+      <form class="contact-form" action="https://formsubmit.co/jvlvenue@gmail.com" method="POST">
+        <!-- FormSubmit Configuration -->
+        <input type="hidden" name="_subject" value="New JVL Venue Booking Inquiry">
+        <input type="hidden" name="_template" value="table">
+        <input type="hidden" name="_captcha" value="false">
+        <input type="text" name="_honey" style="display:none">
+
         <div>
           <label for="name">Full name</label>
           <input id="name" name="name" type="text" placeholder="Your name" required>
@@ -157,33 +163,39 @@
         </div>
         <div>
           <label for="event-date">Desired Event Date</label>
-          <input id="event-date" name="event-date" type="date">
+          <input id="event-date" name="event_date" type="date">
         </div>
         <div class="field--full">
           <label for="guests">Estimated guests (Maximum 75)</label>
           <input id="guests" name="guests" type="number" min="1" max="75" placeholder="e.g. 50 (Max 75)">
         </div>
         <div class="field--full">
-          <label>Type of Event</label>
-          <div class="package-checks" id="package-checks">
-            <label class="package-check"><input type="checkbox" name="event_birthday" value="Birthday"><span>Birthday</span></label>
-            <label class="package-check"><input type="checkbox" name="event_quince" value="Quinceañera"><span>Quinceañera</span></label>
-            <label class="package-check"><input type="checkbox" name="event_baptism" value="Baptism"><span>Baptism / Communion</span></label>
-            <label class="package-check"><input type="checkbox" name="event_shower" value="Shower"><span>Shower &amp; Reception</span></label>
-            <label class="package-check"><input type="checkbox" name="event_family" value="Family Gathering"><span>Family Gathering</span></label>
-            <label class="package-check"><input type="checkbox" name="event_corporate" value="Corporate Event"><span>Corporate Event</span></label>
-            <label class="package-check"><input type="checkbox" name="event_graduation" value="Graduation"><span>Graduation</span></label>
-            <label class="package-check"><input type="checkbox" name="event_anniversary" value="Anniversary"><span>Anniversary</span></label>
-            <label class="package-check"><input type="checkbox" name="event_other" value="Other"><span>Other / General Inquiry</span></label>
-          </div>
+          <label for="event-type">Type of Celebration (Pick One)</label>
+          <select id="event-type" name="event_type" required>
+            <option value="" disabled selected>Select celebration type…</option>
+            <option value="Birthday">Birthday</option>
+            <option value="Quinceañera">Quinceañera</option>
+            <option value="Baptism / Communion">Baptism / Communion</option>
+            <option value="Shower & Reception">Shower &amp; Reception</option>
+            <option value="Family Gathering">Family Gathering</option>
+            <option value="Corporate Event">Corporate Event</option>
+            <option value="Graduation">Graduation</option>
+            <option value="Anniversary">Anniversary</option>
+            <option value="Sweet 16">Sweet 16</option>
+            <option value="Other">Other (Specify below)</option>
+          </select>
+        </div>
+        <div class="field--full" id="other-event-wrap" style="display:none">
+          <label for="other-event">Specify Your Event Type</label>
+          <input id="other-event" name="custom_event_type" type="text" placeholder="e.g. Retirement party, Memorial gathering, Pop-up shop...">
         </div>
         <div class="field--full">
           <label>Additional Services Requested (Optional Add-Ons)</label>
           <div class="package-checks">
-            <label class="package-check"><input type="checkbox" name="addon_food_warmers" value="Food Warmers"><span>Food Warmers</span></label>
-            <label class="package-check"><input type="checkbox" name="addon_sound_system" value="Sound System"><span>Sound System</span></label>
-            <label class="package-check"><input type="checkbox" name="addon_table_decor" value="Table Decorations"><span>Table Decorations</span></label>
-            <label class="package-check"><input type="checkbox" name="addon_balloons" value="Balloons & Backdrops"><span>Balloons &amp; Backdrops</span></label>
+            <label class="package-check"><input type="checkbox" name="addon_food_warmers" value="Yes"><span>Food Warmers</span></label>
+            <label class="package-check"><input type="checkbox" name="addon_sound_system" value="Yes"><span>Sound System</span></label>
+            <label class="package-check"><input type="checkbox" name="addon_table_decor" value="Yes"><span>Table Decorations</span></label>
+            <label class="package-check"><input type="checkbox" name="addon_balloons" value="Yes"><span>Balloons &amp; Backdrops</span></label>
           </div>
         </div>
         <div class="field--full">

@@ -1489,6 +1489,19 @@ nav.main-nav a:hover,nav.main-nav a.active{border-color:var(--gold);color:var(--
   padding:12px 14px;border:1.5px solid rgba(255,255,255,.16);border-radius:10px;font-family:inherit;font-size:.95rem;background:#181818;color:var(--white);
   transition:border-color .15s ease, box-shadow .15s ease;
 }
+.contact-form select{
+  cursor:pointer;
+  appearance:none;
+  -webkit-appearance:none;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23C5A059' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;
+  background-position:right 14px center;
+  padding-right:40px;
+}
+.contact-form select option{
+  background:#1a1a1a;
+  color:#ffffff;
+}
 .contact-form input:focus,.contact-form select:focus,.contact-form textarea:focus{
   outline:none;border-color:var(--gold);box-shadow:0 0 0 3px rgba(197,160,89,.22);
 }
@@ -2718,6 +2731,15 @@ body.theme-light .contact-form textarea{
   border:1.5px solid #d4c7b2 !important;
   color:#111111 !important;
   box-shadow:0 2px 6px rgba(0,0,0,.02);
+}
+body.theme-light .contact-form select{
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%237a5814' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E") !important;
+  background-repeat:no-repeat !important;
+  background-position:right 14px center !important;
+}
+body.theme-light .contact-form select option{
+  background:#FFFFFF;
+  color:#111111;
 }
 body.theme-light .contact-form input::placeholder,
 body.theme-light .contact-form textarea::placeholder{

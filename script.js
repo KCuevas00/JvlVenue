@@ -118,20 +118,37 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
-  // ---------- Pre-check requested package(s) from URL ----------
-  var packageChecks = document.getElementById('package-checks');
-  if (packageChecks) {
-    var params = new URLSearchParams(window.location.search);
-    var requested = params.getAll('package').flatMap(function (v) {
-      return v.split(',');
-    }).map(function (v) { return v.trim().toLowerCase(); });
+  // ---------- Event Type Dropdown & "Other" Field Toggle ----------
+  var eventTypeSelect = document.getElementById('event-type');
+  var otherEventWrap = document.getElementById('other-event-wrap');
+  var otherEventInput = document.getElementById('other-event');
 
-    if (requested.length) {
-      packageChecks.querySelectorAll('input[type="checkbox"]').forEach(function (box) {
-        if (requested.indexOf(box.value.trim().toLowerCase()) !== -1) {
-          box.checked = true;
+  if (eventTypeSelect) {
+    function toggleOtherField() {
+      if (eventTypeSelect.value === 'Other') {
+        if (otherEventWrap) otherEventWrap.style.display = 'block';
+        if (otherEventInput) otherEventInput.focus();
+      } else {
+        if (otherEventWrap) otherEventWrap.style.display = 'none';
+        if (otherEventInput) otherEventInput.value = '';
+      }
+    }
+
+    eventTypeSelect.addEventListener('change', toggleOtherField);
+
+    // Pre-select celebration type from URL parameter (e.g. ?event=birthday)
+    var params = new URLSearchParams(window.location.search);
+    var requestedEvent = params.get('event') || params.get('package') || params.get('type');
+    if (requestedEvent) {
+      var reqLower = requestedEvent.trim().toLowerCase();
+      for (var i = 0; i < eventTypeSelect.options.length; i++) {
+        var opt = eventTypeSelect.options[i];
+        if (opt.value && opt.value.toLowerCase().indexOf(reqLower) !== -1) {
+          eventTypeSelect.selectedIndex = i;
+          toggleOtherField();
+          break;
         }
-      });
+      }
     }
   }
 
