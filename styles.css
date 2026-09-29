@@ -1588,7 +1588,7 @@ footer.site .wrap{padding-top:64px;padding-bottom:calc(28px + env(safe-area-inse
 .footer-socials svg{width:15px;height:15px;fill:currentColor}
 .footer-bottom{border-top:1px solid rgba(255,255,255,.12);padding-top:20px;display:flex;justify-content:space-between;font-size:.8rem;color:var(--gray-500)}
 
-/* ---------- Floating Contact / SMS Prompt Widget ---------- */
+/* ---------- Floating Contact / SMS Small Popup Widget ---------- */
 .sms-widget-wrap {
   position: fixed;
   bottom: 24px;
@@ -1633,208 +1633,167 @@ footer.site .wrap{padding-top:64px;padding-bottom:calc(28px + env(safe-area-inse
   transform: scale(1.05);
 }
 
-/* SMS Prompt Card */
-.sms-prompt-card {
+/* Small Popup Tooltip on Bubble Click */
+.sms-popup-tooltip {
   position: absolute;
-  bottom: 70px;
+  bottom: 72px;
   right: 0;
-  width: 310px;
-  max-width: calc(100vw - 36px);
   background: #181818;
-  border: 1px solid rgba(197, 160, 89, 0.4);
-  border-radius: 16px;
-  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6);
-  padding: 18px 20px;
+  border: 1px solid rgba(197, 160, 89, 0.5);
+  border-radius: 14px;
+  box-shadow: 0 14px 35px rgba(0, 0, 0, 0.55);
+  padding: 8px 10px 8px 8px;
   display: flex;
-  flex-direction: column;
-  gap: 12px;
+  align-items: center;
+  gap: 6px;
   opacity: 0;
   visibility: hidden;
-  transform: translateY(12px) scale(0.96);
-  transition: opacity .25s ease, transform .25s ease, visibility .25s ease;
+  transform: translateY(8px) scale(0.96);
+  transition: opacity .2s ease, transform .2s ease, visibility .2s ease;
   pointer-events: none;
+  white-space: nowrap;
 }
 
-.sms-prompt-card.open {
+.sms-popup-tooltip::after {
+  content: "";
+  position: absolute;
+  bottom: -7px;
+  right: 22px;
+  width: 0;
+  height: 0;
+  border-left: 7px solid transparent;
+  border-right: 7px solid transparent;
+  border-top: 7px solid #181818;
+}
+
+.sms-popup-tooltip.open {
   opacity: 1;
   visibility: visible;
   transform: translateY(0) scale(1);
   pointer-events: auto;
 }
 
-.sms-prompt-close {
-  position: absolute;
-  top: 10px;
-  right: 12px;
+.sms-popup-content {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  color: inherit;
+  padding: 4px 6px;
+  border-radius: 8px;
+  transition: background .15s ease;
+}
+
+.sms-popup-content:hover {
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.sms-popup-icon {
+  width: 36px;
+  height: 36px;
+  background: #25D366;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  box-shadow: 0 3px 10px rgba(37, 211, 102, 0.35);
+}
+
+.sms-popup-icon svg {
+  width: 18px;
+  height: 18px;
+  fill: #ffffff;
+}
+
+.sms-popup-text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.25;
+  text-align: left;
+}
+
+.sms-popup-label {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--gray-400);
+}
+
+.sms-popup-number {
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.96rem;
+  font-weight: 700;
+  color: var(--gold);
+}
+
+.sms-popup-arrow-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: rgba(197, 160, 89, 0.15);
+  color: var(--gold);
+  margin-left: 4px;
+  transition: transform .15s ease, background .15s ease;
+}
+
+.sms-popup-content:hover .sms-popup-arrow-btn {
+  transform: translateX(2px);
+  background: var(--gold);
+  color: #111111;
+}
+
+.sms-popup-close {
   background: none;
   border: none;
   color: var(--gray-400);
-  font-size: 1.35rem;
+  font-size: 1.25rem;
   line-height: 1;
   cursor: pointer;
-  padding: 4px 8px;
-  border-radius: 6px;
+  padding: 4px 6px;
+  border-radius: 4px;
+  margin-left: 2px;
   transition: color .15s ease, background .15s ease;
 }
 
-.sms-prompt-close:hover {
+.sms-popup-close:hover {
   color: var(--white);
-  background: rgba(255, 255, 255, .1);
+  background: rgba(255, 255, 255, 0.1);
 }
 
-.sms-prompt-header {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding-right: 20px;
-}
-
-.sms-prompt-avatar {
-  position: relative;
-  width: 44px;
-  height: 44px;
-  flex-shrink: 0;
-}
-
-.sms-prompt-avatar img {
-  width: 100%;
-  height: 100%;
-  border-radius: 50%;
-  object-fit: cover;
-  border: 1.5px solid var(--gold);
-}
-
-.sms-online-dot {
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  width: 12px;
-  height: 12px;
-  background: #25D366;
-  border: 2px solid #181818;
-  border-radius: 50%;
-}
-
-.sms-prompt-meta {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-}
-
-.sms-prompt-title {
-  font-family: 'Outfit', sans-serif;
-  font-size: 1rem;
-  font-weight: 700;
-  color: var(--white);
-  line-height: 1.2;
-}
-
-.sms-prompt-sub {
-  font-size: 0.78rem;
-  color: var(--gold);
-  font-weight: 600;
-}
-
-.sms-prompt-body {
-  font-size: 0.88rem;
-  line-height: 1.45;
-  color: var(--gray-300);
-  margin: 0;
-}
-
-.sms-prompt-body strong {
-  color: var(--gold-light);
-  font-weight: 700;
-}
-
-.sms-prompt-actions {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  margin-top: 4px;
-}
-
-.sms-btn-send {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  width: 100%;
-  padding: 10px 16px;
-  background: #25D366;
-  color: #ffffff;
-  border: 1px solid #1ebe5d;
-  border-radius: 8px;
-  font-size: 0.92rem;
-  font-weight: 700;
-  text-decoration: none;
-  box-shadow: 0 4px 14px rgba(37, 211, 102, 0.35);
-  transition: background .2s ease, transform .15s ease, box-shadow .2s ease;
-}
-
-.sms-btn-send:hover {
-  background: #1ebe5d;
-  color: #ffffff;
-  transform: translateY(-1px);
-  box-shadow: 0 6px 18px rgba(37, 211, 102, 0.5);
-}
-
-.sms-btn-form {
-  font-size: 0.8rem;
-  color: var(--gray-400);
-  text-align: center;
-  text-decoration: none;
-  padding: 4px;
-  transition: color .15s ease;
-}
-
-.sms-btn-form:hover {
-  color: var(--gold);
-  text-decoration: underline;
-}
-
-/* Light Theme Overrides for SMS Prompt */
-body.theme-light .sms-prompt-card {
+/* Light Theme Overrides */
+body.theme-light .sms-popup-tooltip {
   background: #FFFFFF !important;
-  border: 1px solid rgba(197, 160, 89, 0.45) !important;
-  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.16) !important;
+  border: 1px solid rgba(197, 160, 89, 0.5) !important;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.14) !important;
 }
 
-body.theme-light .sms-online-dot {
-  border-color: #FFFFFF !important;
+body.theme-light .sms-popup-tooltip::after {
+  border-top-color: #FFFFFF !important;
 }
 
-body.theme-light .sms-prompt-title {
-  color: #111111 !important;
-}
-
-body.theme-light .sms-prompt-sub {
-  color: #8c6819 !important;
-}
-
-body.theme-light .sms-prompt-body {
-  color: #333333 !important;
-}
-
-body.theme-light .sms-prompt-body strong {
-  color: #8c6819 !important;
-}
-
-body.theme-light .sms-prompt-close {
-  color: #888888 !important;
-}
-
-body.theme-light .sms-prompt-close:hover {
-  color: #111111 !important;
-  background: rgba(0, 0, 0, .05) !important;
-}
-
-body.theme-light .sms-btn-form {
+body.theme-light .sms-popup-label {
   color: #666666 !important;
 }
 
-body.theme-light .sms-btn-form:hover {
+body.theme-light .sms-popup-number {
   color: #8c6819 !important;
+}
+
+body.theme-light .sms-popup-close {
+  color: #888888 !important;
+}
+
+body.theme-light .sms-popup-close:hover {
+  color: #111111 !important;
+  background: rgba(0, 0, 0, 0.06) !important;
+}
+
+body.theme-light .sms-popup-content:hover {
+  background: rgba(0, 0, 0, 0.04) !important;
 }
 
 /* ---------- Placeholder styling for pending photos & logos ---------- */

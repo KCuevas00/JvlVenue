@@ -945,22 +945,13 @@ document.addEventListener('DOMContentLoaded', function () {
       });
     }
 
-    // 13. Floating SMS Prompt Card
-    var smsPromptCard = document.getElementById('sms-prompt-card');
-    if (smsPromptCard) {
-      var smsTitle = smsPromptCard.querySelector('.sms-prompt-title');
-      var smsSub = smsPromptCard.querySelector('.sms-prompt-sub');
-      var smsBody = smsPromptCard.querySelector('.sms-prompt-body');
-      var smsBtnSend = smsPromptCard.querySelector('.sms-btn-send span');
-
-      if (smsTitle) smsTitle.textContent = 'JVL Venue';
-      if (smsSub) smsSub.textContent = isEs ? '(Solo Texto) · (331) 330-1259' : '(Text Only) · (331) 330-1259';
-      if (smsBody) {
-        smsBody.innerHTML = isEs
-          ? '¿Desea enviar un mensaje de texto directo a nuestra coordinadora al <strong>(331) 330-1259</strong> para consultar fechas o hacer preguntas?'
-          : 'Would you like to send a direct text message to our venue coordinator at <strong>(331) 330-1259</strong> to check dates or ask questions?';
+    // 13. Floating SMS Small Popup Tooltip
+    var smsPopupTooltip = document.getElementById('sms-popup-tooltip');
+    if (smsPopupTooltip) {
+      var smsLabel = smsPopupTooltip.querySelector('.sms-popup-label');
+      if (smsLabel) {
+        smsLabel.textContent = isEs ? 'Enviar mensaje de texto a' : 'Send text message to';
       }
-      if (smsBtnSend) smsBtnSend.textContent = isEs ? 'Enviar Mensaje de Texto' : 'Send Text Message';
     }
 
     try {
@@ -986,57 +977,49 @@ document.addEventListener('DOMContentLoaded', function () {
     applyLanguage('es');
   }
 
-  // ---------- Floating SMS Prompt Card Interactions ----------
+  // ---------- Floating SMS Small Popup Tooltip Interactions ----------
   var smsBtn = document.getElementById('floating-sms-btn');
-  var smsCard = document.getElementById('sms-prompt-card');
-  var smsClose = document.getElementById('sms-prompt-close');
+  var smsTooltip = document.getElementById('sms-popup-tooltip');
+  var smsClose = document.getElementById('sms-popup-close');
 
-  if (smsBtn && smsCard) {
-    function openSmsPrompt() {
-      smsCard.classList.add('open');
+  if (smsBtn && smsTooltip) {
+    function toggleSmsTooltip() {
+      smsTooltip.classList.toggle('open');
+      smsTooltip.setAttribute('aria-hidden', !smsTooltip.classList.contains('open'));
     }
 
-    function closeSmsPrompt() {
-      smsCard.classList.remove('open');
-      try {
-        sessionStorage.setItem('jvl_sms_dismissed', 'true');
-      } catch (e) {}
+    function closeSmsTooltip() {
+      smsTooltip.classList.remove('open');
+      smsTooltip.setAttribute('aria-hidden', 'true');
     }
+
+    smsBtn.addEventListener('click', function (e) {
+      e.stopPropagation();
+      toggleSmsTooltip();
+    });
 
     if (smsClose) {
       smsClose.addEventListener('click', function (e) {
         e.stopPropagation();
-        closeSmsPrompt();
+        closeSmsTooltip();
       });
     }
 
     // Close when clicking outside the widget
     document.addEventListener('click', function (e) {
-      if (!smsCard.contains(e.target) && !smsBtn.contains(e.target)) {
-        if (smsCard.classList.contains('open')) {
-          closeSmsPrompt();
+      if (!smsTooltip.contains(e.target) && !smsBtn.contains(e.target)) {
+        if (smsTooltip.classList.contains('open')) {
+          closeSmsTooltip();
         }
       }
     });
 
     // Close on Escape key
     document.addEventListener('keydown', function (e) {
-      if (e.key === 'Escape' && smsCard.classList.contains('open')) {
-        closeSmsPrompt();
+      if (e.key === 'Escape' && smsTooltip.classList.contains('open')) {
+        closeSmsTooltip();
       }
     });
-
-    // Automatically prompt visitor after 2.5 seconds on first visit
-    var isDismissed = false;
-    try {
-      isDismissed = sessionStorage.getItem('jvl_sms_dismissed') === 'true';
-    } catch (e) {}
-
-    if (!isDismissed) {
-      setTimeout(function () {
-        openSmsPrompt();
-      }, 2500);
-    }
   }
 
   // Ensure Light Theme is active by default

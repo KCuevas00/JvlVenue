@@ -260,30 +260,25 @@
 
 <!-- Floating SMS Action Widget -->
 <div class="sms-widget-wrap">
-  <div class="sms-prompt-card" id="sms-prompt-card" role="dialog" aria-modal="true" aria-label="Text JVL Venue">
-    <button type="button" class="sms-prompt-close" id="sms-prompt-close" aria-label="Close message prompt">&times;</button>
-    <div class="sms-prompt-header">
-      <div class="sms-prompt-avatar">
-        <img src="photos/logo-celebration.jpg" alt="JVL Venue">
-        <span class="sms-online-dot"></span>
+  <div class="sms-popup-tooltip" id="sms-popup-tooltip" role="tooltip" aria-hidden="true">
+    <a href="sms:+13313301259" class="sms-popup-content" id="sms-popup-link">
+      <span class="sms-popup-icon">
+        <svg viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-2 12H6v-2h12v2zm0-3H6V9h12v2zm0-3H6V6h12v2z"/></svg>
+      </span>
+      <div class="sms-popup-text">
+        <span class="sms-popup-label">Send text message to</span>
+        <strong class="sms-popup-number">(331) 330-1259</strong>
       </div>
-      <div class="sms-prompt-meta">
-        <strong class="sms-prompt-title">JVL Venue</strong>
-        <span class="sms-prompt-sub">(Text Only) · (331) 330-1259</span>
-      </div>
-    </div>
-    <p class="sms-prompt-body">Would you like to send a direct text message to our venue coordinator at <strong>(331) 330-1259</strong> to check dates or ask questions?</p>
-    <div class="sms-prompt-actions">
-      <a href="sms:+13313301259" class="btn btn--gold sms-btn-send">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/></svg>
-        <span>Send Text Message</span>
-      </a>
-    </div>
+      <span class="sms-popup-arrow-btn">
+        <svg viewBox="0 0 24 24" width="16" height="16"><path fill="currentColor" d="M5 13h11.86l-5.43 5.43 1.42 1.42L21.14 12l-8.29-7.85-1.42 1.42L16.86 11H5v2z"/></svg>
+      </span>
+    </a>
+    <button type="button" class="sms-popup-close" id="sms-popup-close" aria-label="Close tooltip">&times;</button>
   </div>
 
-  <a href="sms:+13313301259" class="floating-contact" id="floating-sms-btn" aria-label="Text JVL Venue at (331) 330-1259" title="Text us at (331) 330-1259">
+  <button type="button" class="floating-contact" id="floating-sms-btn" aria-label="Send text message to (331) 330-1259" title="Send text message to (331) 330-1259">
     <svg viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-2 12H6v-2h12v2zm0-3H6V9h12v2zm0-3H6V6h12v2z"/></svg>
-  </a>
+  </button>
 </div>
 
 <script src="script.js"></script>
