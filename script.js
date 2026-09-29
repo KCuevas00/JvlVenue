@@ -652,41 +652,40 @@ document.addEventListener('DOMContentLoaded', function () {
       var faqQuestions = isEs ? [
         '¿Qué incluye la renta de nuestro salón?',
         '¿Cómo funciona el precio y las cotizaciones?',
-        '¿Cuál es el horario habitual de renta?',
+        '¿Cuál es el horario habitual y política de cierre?',
+        '¿Se requiere un depósito de seguridad y cuáles son las normas de entrega?',
         '¿Puedo traer comida y banquetes externos?',
         '¿Cuál es la capacidad máxima de invitados?',
         '¿Puedo agendar una visita en persona antes de reservar?'
       ] : [
         'What is included with our hall rental?',
         'How does pricing work?',
-        'What are your standard rental hours?',
+        'What are your rental hours and closing policy?',
+        'Is a security deposit required, and what are the checkout guidelines?',
         'Can I bring outside food and catering?',
         'What is the maximum guest capacity?',
         'Can I schedule an in-person tour before reserving?'
       ];
 
-      var faqAnswers = isEs ? [
-        'Cada reservación del salón incluye el montaje de mesas, sillas cómodas y manteles limpios para hasta 75 invitados. También disfruta de acceso privado al salón interior climatizado y baños privados. La decoración personalizada (arcos de globos, fondos temáticos, centros de mesa) está disponible como un servicio opcional por un costo adicional.',
-        'Cada evento se cotiza de forma individual según el tipo de celebración, la fecha (días de semana vs. fines de semana) y sus necesidades de montaje. En lugar de paquetes rígidos, ofrecemos cotizaciones personalizadas para que solo pague por lo que su fiesta realmente necesita.',
-        'Nuestro horario estándar de renta para celebraciones es de 5:00 PM a 11:30 PM. Contáctenos para coordinar el horario de acceso para montaje y la disponibilidad de fechas.',
-        '¡Sí! Los anfitriones tienen total libertad de traer comida de afuera, especialidades familiares hechas en casa, pastel de celebración y bebidas sin costo adicional.',
-        'Nuestro salón tiene capacidad cómoda para hasta 75 invitados como máximo, manteniendo un ambiente íntimo y seguro en cumplimiento con las normas de seguridad contra incendios.',
-        'Sí, con gusto coordinamos recorridos y consultas en Plano, IL con previa cita. Simplemente envíe una solicitud de información o llámenos para fijar un horario conveniente para su visita.'
-      ] : [
-        'Every hall reservation includes setup tables, comfortable chairs, and fresh tablecloths for up to 75 guests. You also enjoy private access to the climate-controlled indoor salon and private restrooms. Custom decoration styling (balloon arches, themed backdrops, centerpieces) is available as an optional add-on for an extra fee.',
-        'Every event is priced individually around your specific event type, date (weekday vs. weekend), and custom setup needs. Rather than rigid pre-packaged tiers, we provide tailored quotes so you only pay for what your party actually needs.',
-        'Our standard celebration rental window is from 5:00 PM to 11:30 PM. Contact us to coordinate setup access and date availability.',
-        'Yes! Hosts have the freedom to bring outside catering, homemade family specialties, celebration cakes, and refreshments at no extra charge.',
-        'Our salon space comfortably accommodates up to 75 guests maximum to maintain an intimate, welcoming atmosphere and comply with fire safety guidelines.',
-        'Yes, walkthroughs and consultations in Plano, IL are gladly arranged by appointment. Simply submit an inquiry or give us a call to set up a convenient time to visit.'
+      var faqAnswersEsHtml = [
+        '<p>Cada reservación del salón incluye el montaje de mesas, sillas cómodas y manteles limpios para hasta 75 invitados. También disfruta de acceso privado al salón interior climatizado y baños privados. La decoración personalizada (arcos de globos, fondos temáticos, centros de mesa) está disponible como un servicio opcional por un costo adicional.</p>',
+        '<p>Cada evento se cotiza de forma individual según el tipo de celebración, la fecha (días de semana vs. fines de semana) y sus necesidades de montaje. En lugar de paquetes rígidos, ofrecemos cotizaciones personalizadas para que solo pague por lo que su fiesta realmente necesita.</p>',
+        '<p>Nuestro horario regular de celebración es de 5:00 PM a una hora estricta de cierre a las 11:30 PM. Conforme a las normas del contrato, toda la música, festejo y salida de invitados debe concluir puntualmente a las 11:30 PM. Contáctenos para coordinar el acceso para montaje y la disponibilidad de fechas.</p>',
+        '<p>Sí, se requiere un depósito de seguridad al reservar para asegurar su fecha. Para recibir el reembolso total del depósito, el salón debe entregarse en las mismas condiciones en que fue proporcionado y cumplir con todas las normas del contrato:</p><ul style="margin:10px 0 6px 18px;padding:0;display:flex;flex-direction:column;gap:6px;line-height:1.55"><li><strong>Hora Estricta de Cierre:</strong> Hora de cierre obligatoria a las 11:30 PM con todos los invitados fuera de las instalaciones.</li><li><strong>Retiro de Basura:</strong> Toda la basura debe retirarse de las instalaciones y todos los botes vaciarse, incluidos los botes de los baños.</li><li><strong>Mesas y Sillas:</strong> Las mesas y sillas deben dejarse organizadas.</li><li><strong>Decoraciones:</strong> Todas las decoraciones DEBEN ser retiradas de techos y paredes. Está estrictamente prohibido usar clavos, grapas, chinches o tachuelas ya que dañan las superficies o desprenden la pintura.</li><li><strong>Sin Pirotecnia:</strong> Los fuegos artificiales no están permitidos en ningún lugar de la propiedad.</li><li><strong>Devolución del Depósito:</strong> Cualquier daño a mobiliario, mantelería, paredes o equipo puede resultar en la pérdida parcial o total del depósito. El depósito será reembolsado tras la inspección de la propiedad, siempre que se hayan cumplido las condiciones.</li></ul>',
+        '<p>¡Sí! Los anfitriones tienen total libertad de traer comida de afuera, especialidades familiares hechas en casa, pastel de celebración y bebidas sin costo adicional.</p>',
+        '<p>Nuestro salón tiene capacidad cómoda para hasta 75 invitados como máximo, manteniendo un ambiente íntimo y seguro en cumplimiento con las normas de seguridad contra incendios.</p>',
+        '<p>Sí, con gusto coordinamos recorridos y consultas en Plano, IL con previa cita. Simplemente envíe una solicitud de información o envíenos un mensaje de texto para fijar un horario conveniente para su visita.</p>'
       ];
 
       var faqItems = faqSec.querySelectorAll('.faq-item');
       faqItems.forEach(function (item, idx) {
         var qSpan = item.querySelector('.faq-question > span:first-child');
-        var aP = item.querySelector('.faq-answer-inner > p');
+        var aInner = item.querySelector('.faq-answer-inner');
         if (qSpan && faqQuestions[idx]) qSpan.textContent = faqQuestions[idx];
-        if (aP && faqAnswers[idx]) aP.textContent = faqAnswers[idx];
+        if (aInner && faqAnswersEsHtml[idx]) {
+          if (!aInner.getAttribute('data-en-html')) aInner.setAttribute('data-en-html', aInner.innerHTML);
+          aInner.innerHTML = isEs ? faqAnswersEsHtml[idx] : aInner.getAttribute('data-en-html');
+        }
       });
     }
 
@@ -700,6 +699,19 @@ document.addEventListener('DOMContentLoaded', function () {
         var b = inc.querySelector('.inclusion-badge');
         if (t && incTitles[idx]) t.textContent = incTitles[idx];
         if (b && incBadges[idx]) b.textContent = incBadges[idx];
+      });
+    }
+
+    // Venue.html Specs Bar
+    var specItems = document.querySelectorAll('.spec-item');
+    if (specItems.length >= 4) {
+      var specLabels = isEs ? ['Capacidad de Invitados', 'Renta y Cierre', 'Comida y Bebidas', 'Ubicación'] : ['Guest Capacity', 'Rental & Closing', 'Food & Drinks', 'Location'];
+      var specSubs = isEs ? ['Ambiente íntimo de salón', 'Hora estricta de cierre 11:30 PM', 'Traiga sus platillos y pastel', 'Condado de Kendall y alrededores'] : ['Intimate salon setting', 'Strict 11:30 PM closing time', 'Bring your own dishes & cake', 'Kendall County & surrounds'];
+      specItems.forEach(function (si, idx) {
+        var lbl = si.querySelector('.spec-label');
+        var sub = si.querySelector('.spec-sub');
+        if (lbl && specLabels[idx]) lbl.textContent = specLabels[idx];
+        if (sub && specSubs[idx]) sub.textContent = specSubs[idx];
       });
     }
 
@@ -719,19 +731,28 @@ document.addEventListener('DOMContentLoaded', function () {
       }
       if (vgPs.length >= 6) {
         var vgEsHtml = [
-          '<strong style="color:var(--white)">Horario de Renta:</strong> El horario regular para celebraciones vespertinas es de 5:00 PM a 11:30 PM. Consúltenos para disponibilidad de fechas y horario de entrada para montaje.',
+          '<strong style="color:var(--white)">Horario de Renta y Cierre Estricto:</strong> Las celebraciones se realizan a partir de las 5:00 PM con una hora estricta de cierre a las 11:30 PM. Toda la música, festejos y salida de invitados debe concluir puntualmente a las 11:30 PM.',
+          '<strong style="color:var(--white)">Depósito de Seguridad:</strong> Se requiere un depósito de seguridad al reservar para confirmar y apartar la fecha de su celebración. Los detalles de precios y depósito se brindan al solicitar su cotización.',
+          '<strong style="color:var(--white)">Requisitos de Entrega y Devolución del Depósito:</strong> Para recibir la totalidad de su depósito de regreso, el salón debe entregarse exactamente en las mismas condiciones en que fue recibido. Toda la basura debe ser retirada de las instalaciones y todos los botes de basura deben vaciarse, incluidos los de los baños. Las mesas y sillas deben dejarse organizadas.',
+          '<strong style="color:var(--white)">Decoraciones y Cuidado de Superficies:</strong> Todas las decoraciones DEBEN retirarse de techos y paredes. Está estrictamente prohibido usar clavos, grapas, chinches o tachuelas ya que dañan las superficies o arrancan la pintura.',
+          '<strong style="color:var(--white)">Artículos Prohibidos y Daños:</strong> La pirotecnia y fuegos artificiales de cualquier tipo están estrictamente prohibidos en la propiedad. Cualquier daño al mobiliario, manteles, paredes o equipo del salón puede resultar en la retención parcial o total del depósito.',
+          '<strong style="color:var(--white)">Inspección y Reembolso:</strong> El depósito de seguridad será devuelto oportunamente después de la inspección posterior al evento, siempre que se hayan cumplido todas las condiciones de renta.',
           '<strong style="color:var(--white)">Comodidades Incluidas:</strong> Cada renta incluye mesas, sillas y manteles limpios. Arreglos y decoraciones personalizadas (fondos fotográficos, arcos de globos) están disponibles con costo extra bajo solicitud.',
-          '<strong style="color:var(--white)">Capacidad de Invitados:</strong> Nuestro salón alberga cómodamente hasta un máximo de 75 invitados para garantizar la comodidad y cumplir con los códigos de seguridad contra incendios.',
-          '<strong style="color:var(--white)">Precios y Tarifas:</strong> De acuerdo con nuestra política del salón, no publicamos precios fijos estándar. Las cotizaciones se personalizan según su fecha, tipo de ocasión y requerimientos específicos de montaje.',
-          '<strong style="color:var(--white)">Comida y Bebidas Externas:</strong> Los anfitriones tienen total bienvenida para traer su propio servicio de banquete/catering, platillos familiares, pastel de celebración y bebidas.',
-          '<strong style="color:var(--white)">Contrato de Renta y Reglas:</strong> Las directrices oficiales, depósito y términos de reservación se detallan en el contrato formal provisto al solicitar la fecha.'
+          '<strong style="color:var(--white)">Capacidad de Invitados y Banquete:</strong> Nuestro salón alberga cómodamente hasta un máximo de 75 invitados para seguridad y cumplimiento de normativas. Los anfitriones pueden traer comida externa, platillos familiares, pastel y bebidas.'
         ];
         vgPs.forEach(function (p, idx) {
-          if (!p.getAttribute('data-en-html')) p.setAttribute('data-en-html', p.innerHTML);
-          p.innerHTML = isEs ? vgEsHtml[idx] : p.getAttribute('data-en-html');
+          if (vgEsHtml[idx]) {
+            if (!p.getAttribute('data-en-html')) p.setAttribute('data-en-html', p.innerHTML);
+            p.innerHTML = isEs ? vgEsHtml[idx] : p.getAttribute('data-en-html');
+          }
         });
       }
     }
+
+    // 10.5 Phone Sub-labels (Text Only / Solo texto)
+    document.querySelectorAll('.phone-sub-label').forEach(function (el) {
+      el.textContent = isEs ? '(Solo texto)' : '(Text Only)';
+    });
 
     // 11. CTA Band
     var ctaBandH2 = document.querySelector('.cta-band h2');

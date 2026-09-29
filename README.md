@@ -11,22 +11,18 @@ A responsive, high-end website for **JVL Venue** — an intimate salon and recep
 - **Hero Video Background**: `videos/venue-hero.mp4` (active on homepage hero with dual-layer blur/contain display and pause/play toggle).
 - **Secondary Video Tour**: `videos/venue-tour.mp4` (available for additional tours).
 - **Photos**:
-  - `photos/logo-crown.jpg`: Circular crown logo emblem used as the favicon and navbar crest badge alongside typographic `JVL VENUE`.
-  - `photos/logo-celebration.jpg`: Secondary AI logo featuring disco ball & champagne celebration art (used in gallery & custom packages).
+  - `photos/logo-celebration.jpg`: Official celebration logo emblem used as the favicon, navbar crest badge, and footer badge alongside typographic `JVL VENUE`.
   - `photos/venue-gold-black-setup.jpg`: Banquet hall setup with black tablecloths and gold table runners.
   - `photos/venue-anniversary-setup.jpg`: 50th Anniversary setup with gold balloon numbers, banquet tables, and stage backdrop.
   - `photos/venue-round-tables-setup.jpg`: Round tables with white tablecloths and celebration centerpieces.
-- **Gallery Slots**: 5 active photos with interactive lightbox + 5 placeholder slots ready for upcoming event photos.
+- **Gallery Slots**: Active photo grid with interactive lightbox showcasing authentic venue setups and decor.
 
-## Review Text in Brackets `[...]`
-As requested, all changed text and newly drafted venue copy has been enclosed in `[...]` so you can quickly review and edit when ready.
-
-## Placeholders to Fill in When Ready:
-1. **Phone Number**: Default placeholder is `[(000) 000-0000]` (links to `tel:+10000000000`).
-2. **Email Address**: `[placeholder@jvlvenue.com]`.
+## Contact Information:
+1. **Phone Number**: `(331) 330-1259` (Text only, links to `sms:+13313301259`).
+2. **Email Address**: `jvlvenue@gmail.com`.
 3. **Facebook Link**: `[https://www.facebook.com/placeholder]`.
 4. **Instagram Link**: `[https://www.instagram.com/placeholder]`.
-5. **Address**: Currently set to `[Plano, IL 60545]`. Add street address when ready.
+5. **Address**: `[Plano, IL 60545]`. Add street address when ready.
 
 ## Client Specifications & Confirmed Operations (Sep 2026)
 1. **Pricing Policy**: No prices displayed publicly on the website. All packages and bookings direct visitors to submit an inquiry for a personalized rate estimate.

@@ -345,6 +345,13 @@ nav.main-nav a:hover,nav.main-nav a.active{border-color:var(--gold);color:var(--
 .phone-pill{
   display:flex;align-items:center;gap:8px;font-weight:600;font-size:.8rem;color:var(--white);
 }
+.phone-sub-label{
+  font-size:.74em;
+  opacity:.85;
+  font-weight:500;
+  margin-left:3px;
+  letter-spacing:.02em;
+}
 .phone-pill svg{
   width:26px;height:26px;padding:6px;box-sizing:border-box;
   border-radius:50%;background:var(--gold);fill:var(--ink);flex-shrink:0;
@@ -1898,8 +1905,13 @@ body.theme-light h4{
   color:#000000;
 }
 
-body.theme-light p{
+body.theme-light p,
+body.theme-light li{
   color:#000000;
+}
+
+body.theme-light strong{
+  color:#000000 !important;
 }
 
 body.theme-light .eyebrow{
