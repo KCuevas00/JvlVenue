@@ -945,6 +945,26 @@ document.addEventListener('DOMContentLoaded', function () {
       });
     }
 
+    // 13. Floating SMS Prompt Card
+    var smsPromptCard = document.getElementById('sms-prompt-card');
+    if (smsPromptCard) {
+      var smsTitle = smsPromptCard.querySelector('.sms-prompt-title');
+      var smsSub = smsPromptCard.querySelector('.sms-prompt-sub');
+      var smsBody = smsPromptCard.querySelector('.sms-prompt-body');
+      var smsBtnSend = smsPromptCard.querySelector('.sms-btn-send span');
+      var smsBtnForm = smsPromptCard.querySelector('.sms-btn-form span');
+
+      if (smsTitle) smsTitle.textContent = 'JVL Venue';
+      if (smsSub) smsSub.textContent = isEs ? '(Solo Texto) · (331) 330-1259' : '(Text Only) · (331) 330-1259';
+      if (smsBody) {
+        smsBody.innerHTML = isEs
+          ? '¿Desea enviar un mensaje de texto directo a nuestra coordinadora al <strong>(331) 330-1259</strong> para consultar fechas o hacer preguntas?'
+          : 'Would you like to send a direct text message to our venue coordinator at <strong>(331) 330-1259</strong> to check dates or ask questions?';
+      }
+      if (smsBtnSend) smsBtnSend.textContent = isEs ? 'Enviar Mensaje de Texto' : 'Send Text Message';
+      if (smsBtnForm) smsBtnForm.innerHTML = isEs ? 'O use el formulario de consulta &rarr;' : 'Or use inquiry form &rarr;';
+    }
+
     try {
       localStorage.setItem('jvl_language', lang);
     } catch (e) {}
@@ -966,6 +986,64 @@ document.addEventListener('DOMContentLoaded', function () {
   // Apply on initial load if saved language is Spanish
   if (currentLang === 'es') {
     applyLanguage('es');
+  }
+
+  // ---------- Floating SMS Prompt Card Interactions ----------
+  var smsBtn = document.getElementById('floating-sms-btn');
+  var smsCard = document.getElementById('sms-prompt-card');
+  var smsClose = document.getElementById('sms-prompt-close');
+
+  if (smsBtn && smsCard) {
+    function openSmsPrompt() {
+      smsCard.classList.add('open');
+    }
+
+    function closeSmsPrompt() {
+      smsCard.classList.remove('open');
+      try {
+        sessionStorage.setItem('jvl_sms_dismissed', 'true');
+      } catch (e) {}
+    }
+
+    smsBtn.addEventListener('click', function (e) {
+      e.stopPropagation();
+      smsCard.classList.toggle('open');
+    });
+
+    if (smsClose) {
+      smsClose.addEventListener('click', function (e) {
+        e.stopPropagation();
+        closeSmsPrompt();
+      });
+    }
+
+    // Close when clicking outside the widget
+    document.addEventListener('click', function (e) {
+      if (!smsCard.contains(e.target) && !smsBtn.contains(e.target)) {
+        if (smsCard.classList.contains('open')) {
+          closeSmsPrompt();
+        }
+      }
+    });
+
+    // Close on Escape key
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && smsCard.classList.contains('open')) {
+        closeSmsPrompt();
+      }
+    });
+
+    // Automatically prompt visitor after 2.5 seconds on first visit
+    var isDismissed = false;
+    try {
+      isDismissed = sessionStorage.getItem('jvl_sms_dismissed') === 'true';
+    } catch (e) {}
+
+    if (!isDismissed) {
+      setTimeout(function () {
+        openSmsPrompt();
+      }, 2500);
+    }
   }
 
   // Ensure Light Theme is active by default

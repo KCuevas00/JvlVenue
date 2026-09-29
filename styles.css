@@ -1588,30 +1588,253 @@ footer.site .wrap{padding-top:64px;padding-bottom:calc(28px + env(safe-area-inse
 .footer-socials svg{width:15px;height:15px;fill:currentColor}
 .footer-bottom{border-top:1px solid rgba(255,255,255,.12);padding-top:20px;display:flex;justify-content:space-between;font-size:.8rem;color:var(--gray-500)}
 
-/* ---------- Floating Contact / Text Chat Button ---------- */
-.floating-contact{
-  position:fixed;bottom:24px;right:24px;left:auto;z-index:100;
-  width:58px;height:58px;
-  background:#25D366; /* Generic messaging green hinting at SMS/text chat */
-  border:2.5px solid rgba(255,255,255,.4);
-  border-radius:50%;
-  display:flex;align-items:center;justify-content:center;
-  box-shadow:0 8px 24px rgba(37,211,102,.45), 0 4px 14px rgba(0,0,0,.6);
-  transition:transform .2s ease,background .2s ease,box-shadow .2s ease;
+/* ---------- Floating Contact / SMS Prompt Widget ---------- */
+.sms-widget-wrap {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
 }
-.floating-contact:hover{
-  transform:scale(1.08);
-  background:#1ebe5d;
-  box-shadow:0 12px 30px rgba(37,211,102,.6), 0 6px 18px rgba(0,0,0,.7);
+
+.floating-contact {
+  position: relative;
+  width: 58px;
+  height: 58px;
+  background: #25D366;
+  border: 2.5px solid rgba(255, 255, 255, .4);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 8px 24px rgba(37, 211, 102, .45), 0 4px 14px rgba(0, 0, 0, .6);
+  transition: transform .2s ease, background .2s ease, box-shadow .2s ease;
+  cursor: pointer;
+  padding: 0;
 }
-.floating-contact svg{
-  width:30px;height:30px;
-  fill:#ffffff;
-  transition:transform .2s ease;
+
+.floating-contact:hover {
+  transform: scale(1.08);
+  background: #1ebe5d;
+  box-shadow: 0 12px 30px rgba(37, 211, 102, .6), 0 6px 18px rgba(0, 0, 0, .7);
 }
-.floating-contact:hover svg{
-  fill:#ffffff;
-  transform:scale(1.05);
+
+.floating-contact svg {
+  width: 30px;
+  height: 30px;
+  fill: #ffffff;
+  transition: transform .2s ease;
+}
+
+.floating-contact:hover svg {
+  fill: #ffffff;
+  transform: scale(1.05);
+}
+
+/* SMS Prompt Card */
+.sms-prompt-card {
+  position: absolute;
+  bottom: 70px;
+  right: 0;
+  width: 310px;
+  max-width: calc(100vw - 36px);
+  background: #181818;
+  border: 1px solid rgba(197, 160, 89, 0.4);
+  border-radius: 16px;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6);
+  padding: 18px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(12px) scale(0.96);
+  transition: opacity .25s ease, transform .25s ease, visibility .25s ease;
+  pointer-events: none;
+}
+
+.sms-prompt-card.open {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0) scale(1);
+  pointer-events: auto;
+}
+
+.sms-prompt-close {
+  position: absolute;
+  top: 10px;
+  right: 12px;
+  background: none;
+  border: none;
+  color: var(--gray-400);
+  font-size: 1.35rem;
+  line-height: 1;
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 6px;
+  transition: color .15s ease, background .15s ease;
+}
+
+.sms-prompt-close:hover {
+  color: var(--white);
+  background: rgba(255, 255, 255, .1);
+}
+
+.sms-prompt-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding-right: 20px;
+}
+
+.sms-prompt-avatar {
+  position: relative;
+  width: 44px;
+  height: 44px;
+  flex-shrink: 0;
+}
+
+.sms-prompt-avatar img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 1.5px solid var(--gold);
+}
+
+.sms-online-dot {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 12px;
+  height: 12px;
+  background: #25D366;
+  border: 2px solid #181818;
+  border-radius: 50%;
+}
+
+.sms-prompt-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.sms-prompt-title {
+  font-family: 'Outfit', sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--white);
+  line-height: 1.2;
+}
+
+.sms-prompt-sub {
+  font-size: 0.78rem;
+  color: var(--gold);
+  font-weight: 600;
+}
+
+.sms-prompt-body {
+  font-size: 0.88rem;
+  line-height: 1.45;
+  color: var(--gray-300);
+  margin: 0;
+}
+
+.sms-prompt-body strong {
+  color: var(--gold-light);
+  font-weight: 700;
+}
+
+.sms-prompt-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 4px;
+}
+
+.sms-btn-send {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  padding: 10px 16px;
+  background: #25D366;
+  color: #ffffff;
+  border: 1px solid #1ebe5d;
+  border-radius: 8px;
+  font-size: 0.92rem;
+  font-weight: 700;
+  text-decoration: none;
+  box-shadow: 0 4px 14px rgba(37, 211, 102, 0.35);
+  transition: background .2s ease, transform .15s ease, box-shadow .2s ease;
+}
+
+.sms-btn-send:hover {
+  background: #1ebe5d;
+  color: #ffffff;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 18px rgba(37, 211, 102, 0.5);
+}
+
+.sms-btn-form {
+  font-size: 0.8rem;
+  color: var(--gray-400);
+  text-align: center;
+  text-decoration: none;
+  padding: 4px;
+  transition: color .15s ease;
+}
+
+.sms-btn-form:hover {
+  color: var(--gold);
+  text-decoration: underline;
+}
+
+/* Light Theme Overrides for SMS Prompt */
+body.theme-light .sms-prompt-card {
+  background: #FFFFFF !important;
+  border: 1px solid rgba(197, 160, 89, 0.45) !important;
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.16) !important;
+}
+
+body.theme-light .sms-online-dot {
+  border-color: #FFFFFF !important;
+}
+
+body.theme-light .sms-prompt-title {
+  color: #111111 !important;
+}
+
+body.theme-light .sms-prompt-sub {
+  color: #8c6819 !important;
+}
+
+body.theme-light .sms-prompt-body {
+  color: #333333 !important;
+}
+
+body.theme-light .sms-prompt-body strong {
+  color: #8c6819 !important;
+}
+
+body.theme-light .sms-prompt-close {
+  color: #888888 !important;
+}
+
+body.theme-light .sms-prompt-close:hover {
+  color: #111111 !important;
+  background: rgba(0, 0, 0, .05) !important;
+}
+
+body.theme-light .sms-btn-form {
+  color: #666666 !important;
+}
+
+body.theme-light .sms-btn-form:hover {
+  color: #8c6819 !important;
 }
 
 /* ---------- Placeholder styling for pending photos & logos ---------- */
