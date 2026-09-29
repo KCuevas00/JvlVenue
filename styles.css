@@ -1808,66 +1808,8 @@ header.site.scrolled .brand-text-logo .brand-sub{
 }
 
 /* ============================================================
-   Theme Switcher (Day / Night Mode Toggle)
+   Floating Quick Theme Switcher Pill (Bottom Left)
    ============================================================ */
-.theme-toggle-btn{
-  display:inline-flex;
-  align-items:center;
-  gap:7px;
-  padding:6px 14px;
-  border-radius:100px;
-  background:rgba(20,20,20,.85);
-  border:1.5px solid rgba(197,160,89,.5);
-  color:var(--white);
-  font-family:'Outfit',sans-serif;
-  font-size:.82rem;
-  font-weight:700;
-  letter-spacing:.02em;
-  cursor:pointer;
-  box-shadow:0 4px 14px rgba(0,0,0,.5);
-  transition:all .25s cubic-bezier(0.16, 1, 0.3, 1);
-  white-space:nowrap;
-}
-.theme-toggle-btn:hover{
-  background:rgba(197,160,89,.22);
-  border-color:var(--gold-light);
-  transform:translateY(-1px) scale(1.03);
-  box-shadow:0 0 16px rgba(197,160,89,.4), 0 6px 18px rgba(0,0,0,.6);
-}
-.theme-toggle-btn:active{
-  transform:scale(0.97);
-}
-.theme-toggle-icon{
-  font-size:1rem;
-  line-height:1;
-  display:inline-block;
-  transition:transform .25s ease;
-}
-.theme-toggle-sun{display:inline-block}
-.theme-toggle-moon{display:none}
-
-/* In Light Mode header toggle styling */
-body.theme-light .theme-toggle-btn{
-  background:transparent;
-  border-color:rgba(197,160,89,.7);
-  color:#000000;
-  box-shadow:none;
-}
-body.theme-light .theme-toggle-btn:hover{
-  background:rgba(197,160,89,.15);
-  border-color:var(--gold-dark);
-}
-body.theme-light .theme-toggle-sun{display:none}
-body.theme-light .theme-toggle-moon{display:inline-block}
-
-/* In Mobile Drawer */
-.nav-extra .theme-toggle-btn{
-  width:100%;
-  justify-content:center;
-  padding:10px 16px;
-  font-size:.9rem;
-  margin-bottom:8px;
-}
 
 /* Floating Quick Switcher Pill (Bottom Left) */
 .theme-floating-switcher{
@@ -2005,15 +1947,6 @@ body.theme-light header.site:not(.scrolled) .header-cta .btn--white:hover{
   background:#000000;
   color:#FFFFFF;
 }
-body.theme-light header.site:not(.scrolled) .theme-toggle-btn{
-  background:transparent;
-  border:1.5px solid var(--gold);
-  color:#000000;
-  box-shadow:none;
-}
-body.theme-light header.site:not(.scrolled) .theme-toggle-btn:hover{
-  background:rgba(197,160,89,.15);
-}
 body.theme-light header.site:not(.scrolled) .nav-toggle{
   background:transparent;
   border-color:rgba(0,0,0,.35);
@@ -2076,27 +2009,46 @@ body.theme-light header.site.scrolled .nav-toggle-bar{
   background:#000000;
 }
 
-/* Mobile Drawer in Light Mode */
+/* Desktop Navbar in Light Mode - 100% transparent background on nav and links */
 body.theme-light nav.main-nav{
-  background:#FFFFFF;
-  border-left:1px solid rgba(197,160,89,.3);
+  background:transparent !important;
+  border:none !important;
+  box-shadow:none !important;
 }
-body.theme-light .nav-drawer-title{
-  color:#000000;
+body.theme-light .nav-links-wrap{
+  background:transparent !important;
 }
-body.theme-light .nav-close{
-  color:#000000;
-  border-color:rgba(0,0,0,.15);
-}
-body.theme-light .nav-drawer-header{
-  border-bottom:1px solid rgba(0,0,0,.08);
-}
+body.theme-light nav.main-nav a,
 body.theme-light .nav-links-wrap a{
+  background:transparent !important;
   color:#000000;
+  text-shadow:none !important;
+  box-shadow:none !important;
 }
+body.theme-light nav.main-nav a:hover,
+body.theme-light nav.main-nav a.active,
 body.theme-light .nav-links-wrap a:hover,
 body.theme-light .nav-links-wrap a.active{
+  background:transparent !important;
   color:var(--gold-dark);
+}
+
+/* Mobile Drawer ONLY in Light Mode (screens <= 980px) */
+@media (max-width:980px){
+  body.theme-light nav.main-nav{
+    background:#FFFFFF !important;
+    border-left:1px solid rgba(197,160,89,.3) !important;
+  }
+  body.theme-light .nav-drawer-title{
+    color:#000000;
+  }
+  body.theme-light .nav-close{
+    color:#000000;
+    border-color:rgba(0,0,0,.15);
+  }
+  body.theme-light .nav-drawer-header{
+    border-bottom:1px solid rgba(0,0,0,.08);
+  }
 }
 
 /* Hero Section in Light Mode - Video left 100% as is (no white tint overlay), letters crisp solid black */

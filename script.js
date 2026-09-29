@@ -797,19 +797,6 @@ document.addEventListener('DOMContentLoaded', function () {
     var isLight = currentTheme === 'light';
     var isEs = (typeof currentLang !== 'undefined' && currentLang === 'es');
 
-    document.querySelectorAll('.theme-toggle-btn').forEach(function (btn) {
-      var label = btn.querySelector('.theme-toggle-label');
-      if (label) {
-        label.textContent = isLight ? (isEs ? 'Modo Noche' : 'Night Mode') : (isEs ? 'Modo Día' : 'Day Mode');
-      }
-      var sun = btn.querySelector('.theme-toggle-sun');
-      var moon = btn.querySelector('.theme-toggle-moon');
-      if (sun && moon) {
-        sun.style.display = isLight ? 'none' : 'inline-block';
-        moon.style.display = isLight ? 'inline-block' : 'none';
-      }
-    });
-
     var floatBtn = document.querySelector('.theme-float-btn');
     if (floatBtn) {
       var floatIcon = floatBtn.querySelector('.theme-float-icon');
@@ -842,8 +829,8 @@ document.addEventListener('DOMContentLoaded', function () {
     } catch (e) {}
   }
 
-  // Theme toggle listeners
-  document.querySelectorAll('.theme-toggle-btn, .theme-float-btn').forEach(function (btn) {
+  // Theme toggle listener (floating switcher at bottom of page)
+  document.querySelectorAll('.theme-float-btn').forEach(function (btn) {
     btn.addEventListener('click', function () {
       var nextTheme = currentTheme === 'light' ? 'dark' : 'light';
       applyTheme(nextTheme);
