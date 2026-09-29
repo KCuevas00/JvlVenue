@@ -767,6 +767,11 @@ document.addEventListener('DOMContentLoaded', function () {
     try {
       localStorage.setItem('jvl_language', lang);
     } catch (e) {}
+
+    // Keep theme button labels in sync with language
+    if (typeof updateThemeButtonLabels === 'function') {
+      updateThemeButtonLabels();
+    }
   }
 
   // Toggle button event listeners
@@ -780,6 +785,76 @@ document.addEventListener('DOMContentLoaded', function () {
   // Apply on initial load if saved language is Spanish
   if (currentLang === 'es') {
     applyLanguage('es');
+  }
+
+  // ---------- Day / Night Theme Switcher ----------
+  var currentTheme = 'dark';
+  try {
+    currentTheme = localStorage.getItem('jvl_theme') || 'dark';
+  } catch (e) {}
+
+  function updateThemeButtonLabels() {
+    var isLight = currentTheme === 'light';
+    var isEs = (typeof currentLang !== 'undefined' && currentLang === 'es');
+
+    document.querySelectorAll('.theme-toggle-btn').forEach(function (btn) {
+      var label = btn.querySelector('.theme-toggle-label');
+      if (label) {
+        label.textContent = isLight ? (isEs ? 'Modo Noche' : 'Night Mode') : (isEs ? 'Modo Día' : 'Day Mode');
+      }
+      var sun = btn.querySelector('.theme-toggle-sun');
+      var moon = btn.querySelector('.theme-toggle-moon');
+      if (sun && moon) {
+        sun.style.display = isLight ? 'none' : 'inline-block';
+        moon.style.display = isLight ? 'inline-block' : 'none';
+      }
+    });
+
+    var floatBtn = document.querySelector('.theme-float-btn');
+    if (floatBtn) {
+      var floatIcon = floatBtn.querySelector('.theme-float-icon');
+      var floatText = floatBtn.querySelector('.theme-float-text');
+      if (isLight) {
+        if (floatIcon) floatIcon.textContent = '🌙';
+        if (floatText) floatText.textContent = isEs ? 'Cambiar a Modo Oscuro' : 'Switch to Dark Mode';
+      } else {
+        if (floatIcon) floatIcon.textContent = '☀️';
+        if (floatText) floatText.textContent = isEs ? 'Probar Modo Claro' : 'Preview Light Mode';
+      }
+    }
+  }
+
+  function applyTheme(theme) {
+    currentTheme = theme;
+    var isLight = theme === 'light';
+    if (isLight) {
+      document.documentElement.classList.add('theme-light');
+      document.body.classList.add('theme-light');
+    } else {
+      document.documentElement.classList.remove('theme-light');
+      document.body.classList.remove('theme-light');
+    }
+
+    updateThemeButtonLabels();
+
+    try {
+      localStorage.setItem('jvl_theme', theme);
+    } catch (e) {}
+  }
+
+  // Theme toggle listeners
+  document.querySelectorAll('.theme-toggle-btn, .theme-float-btn').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var nextTheme = currentTheme === 'light' ? 'dark' : 'light';
+      applyTheme(nextTheme);
+    });
+  });
+
+  // Apply on initial load if saved theme is light
+  if (currentTheme === 'light') {
+    applyTheme('light');
+  } else {
+    updateThemeButtonLabels();
   }
 });
 

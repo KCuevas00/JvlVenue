@@ -12,6 +12,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
+<script>try{if(localStorage.getItem('jvl_theme')==='light'){document.documentElement.classList.add('theme-light')}}catch(e){}</script>
 </head>
 <body>
 
@@ -42,6 +43,11 @@
         <a href="contact.html">Contact</a>
       </div>
       <div class="nav-extra">
+        <button type="button" class="theme-toggle-btn theme-toggle-btn--mobile" aria-label="Toggle daylight or dark theme">
+          <span class="theme-toggle-icon theme-toggle-sun">☀️</span>
+          <span class="theme-toggle-icon theme-toggle-moon">🌙</span>
+          <span class="theme-toggle-label">Day Mode</span>
+        </button>
         <button type="button" class="lang-pill-btn lang-toggle-btn" aria-label="Cambiar idioma a Español">
           <span class="lang-flag-icon">🇲🇽</span>
           <span class="lang-text-label">Español</span>
@@ -50,6 +56,11 @@
       </div>
     </nav>
     <div class="header-cta">
+      <button type="button" class="theme-toggle-btn desktop-only" id="themeToggleBtn" aria-label="Toggle daylight or dark theme" title="Switch between Dark and Light mode">
+        <span class="theme-toggle-icon theme-toggle-sun">☀️</span>
+        <span class="theme-toggle-icon theme-toggle-moon">🌙</span>
+        <span class="theme-toggle-label">Day Mode</span>
+      </button>
       <div class="social-icons desktop-only">
         <a href="https://www.facebook.com/placeholder" target="_blank" rel="noopener" aria-label="Facebook">
           <svg viewBox="0 0 24 24"><path d="M13.5 21v-7.6h2.55l.38-2.96h-2.93V8.53c0-.86.24-1.44 1.47-1.44h1.57V4.46A21 21 0 0 0 14.5 4.3c-2.14 0-3.6 1.3-3.6 3.69v2.45H8.35v2.96h2.55V21h2.6z"/></svg>
@@ -459,6 +470,14 @@
 <a href="contact.html" class="floating-contact" aria-label="Message JVL Venue">
   <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
 </a>
+
+<!-- Floating Quick Theme Switcher Pill (Instant Day/Night Client Pitch Toggle) -->
+<div class="theme-floating-switcher" id="themeFloatingSwitcher">
+  <button type="button" class="theme-float-btn" aria-label="Toggle site theme">
+    <span class="theme-float-icon">☀️</span>
+    <span class="theme-float-text">Preview Light Mode</span>
+  </button>
+</div>
 
 <script src="script.js"></script>
 </body>
