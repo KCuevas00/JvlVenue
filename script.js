@@ -389,6 +389,7 @@ document.addEventListener('DOMContentLoaded', function () {
       '.testimonials .tcard',
       '.faq-wrap .faq-item',
       '.inclusions-grid .inclusion-card',
+      '.tiers-grid .tier-card',
       '.cta-band .wrap',
       '.gallery-grid > *',
       '.contact-grid > div',
@@ -689,7 +690,69 @@ document.addEventListener('DOMContentLoaded', function () {
       });
     }
 
-    // 10. Venue.html inclusions & additional services
+    // 10. Venue.html Tiers & Inclusions
+    var tierCards = document.querySelectorAll('.tier-card');
+    if (tierCards.length >= 2) {
+      var tier1Badge = tierCards[0].querySelector('.tier-badge span');
+      var tier1Title = tierCards[0].querySelector('.tier-title');
+      var tier1Sub = tierCards[0].querySelector('.tier-subtitle');
+      if (tier1Badge) tier1Badge.textContent = isEs ? 'Incluido Estándar' : 'Included Standard';
+      if (tier1Title) tier1Title.textContent = isEs ? 'Todo Listo para su Evento' : 'Everything Ready for Your Event';
+      if (tier1Sub) tier1Sub.textContent = isEs ? 'Elementos esenciales incluidos de manera estándar con cada renta para hasta 75 invitados.' : 'Setup essentials provided standard with every hall rental for up to 75 guests.';
+
+      var tier2Badge = tierCards[1].querySelector('.tier-badge span');
+      var tier2Title = tierCards[1].querySelector('.tier-title');
+      var tier2Sub = tierCards[1].querySelector('.tier-subtitle');
+      if (tier2Badge) tier2Badge.textContent = isEs ? 'Opciones Adicionales' : 'Optional Add-Ons';
+      if (tier2Title) tier2Title.textContent = isEs ? 'Mejore su Celebración' : 'Enhance Your Celebration';
+      if (tier2Sub) tier2Sub.textContent = isEs ? 'Mejoras personalizadas y servicios especiales disponibles a solicitud por un costo adicional.' : 'Tailored upgrades and specialty additions available upon request for an extra fee.';
+
+      var tierItems = document.querySelectorAll('.tier-item');
+      if (tierItems.length >= 7) {
+        var tItemTitles = isEs ? [
+          'Mesas',
+          'Sillas',
+          'Manteles de Calidad',
+          'Calentadores de Comida',
+          'Sistema de Sonido',
+          'Decoración de Mesas',
+          'Fondos y Arcos de Globos'
+        ] : [
+          'Tables',
+          'Chairs',
+          'Quality Table Linens',
+          'Commercial Food Warmers',
+          'Party Sound System',
+          'Custom Table Decor',
+          'Backdrops & Balloon Arches'
+        ];
+        var tItemDescs = isEs ? [
+          'Mesas redondas para banquete y mesas auxiliares para pastel/comida, acomodadas cómodamente según el plano de su fiesta.',
+          'Sillas cómodas y limpias provistas para todos los asistentes hasta la capacidad máxima de 75 invitados.',
+          'Mantelería limpia y de calidad incluida de manera estándar para todas las mesas montadas.',
+          'Chafers y estaciones térmicas comerciales para mantener sus platillos de banquete o comida casera calientes durante todo el evento.',
+          'Equipo de audio de alta fidelidad listo para conectar su teléfono, tableta o lista de reproducción para música y brindis.',
+          'Centros de mesa personalizados, caminos de mesa elegantes y detalles decorativos diseñados para realzar cada mesa.',
+          'Arcos de globos personalizados, guirnaldas y escenarios fotográficos temáticos adaptados a los colores de su evento.'
+        ] : [
+          'Round banquet dining tables and auxiliary buffet/cake tables arranged to fit your event plan.',
+          'Comfortable seating provided for all attendees up to our maximum salon capacity of 75 guests.',
+          'Fresh, clean tablecloths included standard for all setup tables to give your celebration a polished look.',
+          'Chafing dishes and hot warming stations to keep your catering at optimal temperature throughout your party.',
+          'High-clarity audio system with Bluetooth / AUX plug-and-play connectivity for music and toasts.',
+          'Custom centerpiece arrangements, specialty runners, and tailored table accents crafted for your theme.',
+          'Custom balloon garlands, themed photo backdrops, and balloon arches created to match your color palette.'
+        ];
+        tierItems.forEach(function (ti, idx) {
+          var t = ti.querySelector('.tier-item-title');
+          var d = ti.querySelector('.tier-item-desc');
+          if (t && tItemTitles[idx]) t.textContent = tItemTitles[idx];
+          if (d && tItemDescs[idx]) d.textContent = tItemDescs[idx];
+        });
+      }
+    }
+
+    // Fallback for standalone inclusion-cards if any
     var incCards = document.querySelectorAll('.inclusion-card');
     if (incCards.length >= 4) {
       var incTitles = isEs ? [
@@ -888,62 +951,9 @@ document.addEventListener('DOMContentLoaded', function () {
     applyLanguage('es');
   }
 
-  // ---------- Day / Night Theme Switcher ----------
-  var currentTheme = 'dark';
-  try {
-    currentTheme = localStorage.getItem('jvl_theme') || 'dark';
-  } catch (e) {}
-
-  function updateThemeButtonLabels() {
-    var isLight = currentTheme === 'light';
-    var isEs = (typeof currentLang !== 'undefined' && currentLang === 'es');
-
-    var floatBtn = document.querySelector('.theme-float-btn');
-    if (floatBtn) {
-      var floatIcon = floatBtn.querySelector('.theme-float-icon');
-      var floatText = floatBtn.querySelector('.theme-float-text');
-      if (isLight) {
-        if (floatIcon) floatIcon.textContent = '🌙';
-        if (floatText) floatText.textContent = isEs ? 'Cambiar a Modo Oscuro' : 'Switch to Dark Mode';
-      } else {
-        if (floatIcon) floatIcon.textContent = '☀️';
-        if (floatText) floatText.textContent = isEs ? 'Probar Modo Claro' : 'Preview Light Mode';
-      }
-    }
-  }
-
-  function applyTheme(theme) {
-    currentTheme = theme;
-    var isLight = theme === 'light';
-    if (isLight) {
-      document.documentElement.classList.add('theme-light');
-      document.body.classList.add('theme-light');
-    } else {
-      document.documentElement.classList.remove('theme-light');
-      document.body.classList.remove('theme-light');
-    }
-
-    updateThemeButtonLabels();
-
-    try {
-      localStorage.setItem('jvl_theme', theme);
-    } catch (e) {}
-  }
-
-  // Theme toggle listener (floating switcher at bottom of page)
-  document.querySelectorAll('.theme-float-btn').forEach(function (btn) {
-    btn.addEventListener('click', function () {
-      var nextTheme = currentTheme === 'light' ? 'dark' : 'light';
-      applyTheme(nextTheme);
-    });
-  });
-
-  // Apply on initial load if saved theme is light
-  if (currentTheme === 'light') {
-    applyTheme('light');
-  } else {
-    updateThemeButtonLabels();
-  }
+  // Ensure Light Theme is active by default
+  document.documentElement.classList.add('theme-light');
+  document.body.classList.add('theme-light');
 });
 
 

@@ -12,9 +12,9 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
-<script>try{if(localStorage.getItem('jvl_theme')==='light'){document.documentElement.classList.add('theme-light')}}catch(e){}</script>
+<script>try{var t=localStorage.getItem('jvl_theme');if(t!=='dark'){document.documentElement.classList.add('theme-light')}}catch(e){}</script>
 </head>
-<body>
+<body class="theme-light">
 
 <header class="site">
   <div class="wrap">
@@ -60,8 +60,8 @@
         </a>
       </div>
       <a class="phone-pill desktop-only" href="sms:+13313301259" title="Text us at (331) 330-1259">
-        <svg viewBox="0 0 24 24"><path d="M6.6 10.8c1.4 2.7 3.9 5.2 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.5.6.6 0 1 .4 1 1v3.5c0 .6-.4 1-1 1C10.5 21.1 2.9 13.5 2.9 4.1c0-.6.4-1 1-1H7.4c.6 0 1 .4 1 1 0 1.2.2 2.4.6 3.5.1.4 0 .8-.2 1L6.6 10.8z"/></svg>
-        <span>(331) 330-1259 <span class="phone-sub-label">(Text Only)</span></span>
+        <svg viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-2 12H6v-2h12v2zm0-3H6V9h12v2zm0-3H6V6h12v2z"/></svg>
+        <span class="phone-pill-text"><span>(331) 330-1259</span><span class="phone-sub-label">(Text Only)</span></span>
       </a>
       <a href="contact.html" class="btn btn--white desktop-only">Reserve Now</a>
       <button class="nav-toggle" aria-label="Toggle menu">
@@ -75,12 +75,12 @@
 <section class="hero hero--small">
   <div class="hero-media">
     <div class="wrap hero-inner">
-      <span class="eyebrow">Get In Touch</span>
-      <h1>Contact &amp; Bookings</h1>
-      <p class="lead">Tell us your date and estimated headcount (max 75 guests). We'll take it from there.</p>
       <div class="crumbs">
         <a href="index.html">Home</a><span class="crumb-sep">/</span><span>Contact</span>
       </div>
+      <span class="eyebrow">Get In Touch</span>
+      <h1>Contact &amp; Bookings</h1>
+      <p class="lead">Tell us your date and estimated headcount (max 75 guests). We'll take it from there.</p>
     </div>
   </div>
 </section>
@@ -249,14 +249,6 @@
 <a href="contact.html" class="floating-contact" aria-label="Message JVL Venue">
   <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
 </a>
-
-<!-- Floating Quick Theme Switcher Pill (Instant Day/Night Client Pitch Toggle) -->
-<div class="theme-floating-switcher" id="themeFloatingSwitcher">
-  <button type="button" class="theme-float-btn" aria-label="Toggle site theme">
-    <span class="theme-float-icon">☀️</span>
-    <span class="theme-float-text">Preview Light Mode</span>
-  </button>
-</div>
 
 <script src="script.js"></script>
 </body>

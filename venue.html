@@ -12,9 +12,9 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
-<script>try{if(localStorage.getItem('jvl_theme')==='light'){document.documentElement.classList.add('theme-light')}}catch(e){}</script>
+<script>try{var t=localStorage.getItem('jvl_theme');if(t!=='dark'){document.documentElement.classList.add('theme-light')}}catch(e){}</script>
 </head>
-<body>
+<body class="theme-light">
 
 <header class="site">
   <div class="wrap">
@@ -60,8 +60,8 @@
         </a>
       </div>
       <a class="phone-pill desktop-only" href="sms:+13313301259" title="Text us at (331) 330-1259">
-        <svg viewBox="0 0 24 24"><path d="M6.6 10.8c1.4 2.7 3.9 5.2 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.5.6.6 0 1 .4 1 1v3.5c0 .6-.4 1-1 1C10.5 21.1 2.9 13.5 2.9 4.1c0-.6.4-1 1-1H7.4c.6 0 1 .4 1 1 0 1.2.2 2.4.6 3.5.1.4 0 .8-.2 1L6.6 10.8z"/></svg>
-        <span>(331) 330-1259 <span class="phone-sub-label">(Text Only)</span></span>
+        <svg viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-2 12H6v-2h12v2zm0-3H6V9h12v2zm0-3H6V6h12v2z"/></svg>
+        <span class="phone-pill-text"><span>(331) 330-1259</span><span class="phone-sub-label">(Text Only)</span></span>
       </a>
       <a href="contact.html" class="btn btn--white desktop-only">Reserve Now</a>
       <button class="nav-toggle" aria-label="Toggle menu">
@@ -75,12 +75,12 @@
 <section class="hero hero--small">
   <div class="hero-media">
     <div class="wrap hero-inner">
-      <span class="eyebrow">Salon Space &amp; Amenities</span>
-      <h1>The Venue</h1>
-      <p class="lead">An intimate reception salon and private event hall in Plano, IL accommodating gatherings of up to 75 guests.</p>
       <div class="crumbs">
         <a href="index.html">Home</a><span class="crumb-sep">/</span><span>The Venue</span>
       </div>
+      <span class="eyebrow">Salon Space &amp; Amenities</span>
+      <h1>The Venue</h1>
+      <p class="lead">An intimate reception salon and private event hall in Plano, IL accommodating gatherings of up to 75 guests.</p>
     </div>
   </div>
 </section>
@@ -112,108 +112,111 @@
     <div class="center" style="max-width:740px;margin:0 auto 36px">
       <span class="eyebrow">Rental Offerings</span>
       <h2>Included Amenities &amp; Additional Services</h2>
-      <p style="font-size:.95rem;color:var(--gray-400)">Every hall reservation includes setup essentials for up to 75 guests, plus optional add-on services to complete your celebration.</p>
+      <p class="section-lead-text">Every hall reservation includes setup essentials for up to 75 guests, plus optional add-on services to complete your celebration.</p>
     </div>
 
-    <!-- Group 1: Included Standard -->
-    <div style="margin-bottom:36px">
-      <h3 style="font-family:'Outfit',sans-serif;font-size:1.15rem;margin-bottom:14px;color:var(--gold);display:flex;align-items:center;gap:8px">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>
-        <span>Included Standard With Every Rental</span>
-      </h3>
-      <div class="inclusions-grid inclusions-grid--3">
-        <!-- Tables -->
-        <div class="inclusion-card">
-          <div class="inclusion-header">
-            <div class="inclusion-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="5" rx="1.5"/><path d="M5 9v11M19 9v11M9 9v7M15 9v7"/></svg>
-            </div>
-            <span class="inclusion-badge inclusion-badge--included">Included</span>
+    <!-- Side-by-Side Tier Layout -->
+    <div class="tiers-grid">
+      <!-- Tier 1: Included Standard -->
+      <div class="tier-card tier-card--included">
+        <div class="tier-header">
+          <div class="tier-badge-row">
+            <span class="tier-badge tier-badge--included">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+              <span>Included Standard</span>
+            </span>
           </div>
-          <h3 class="inclusion-title">Tables</h3>
-          <p class="inclusion-desc">Round banquet dining tables and auxiliary food/cake tables arranged comfortably to fit your celebration's floor plan.</p>
+          <h3 class="tier-title">Everything Ready for Your Event</h3>
+          <p class="tier-subtitle">Setup essentials provided standard with every hall rental for up to 75 guests.</p>
         </div>
 
-        <!-- Chairs -->
-        <div class="inclusion-card">
-          <div class="inclusion-header">
-            <div class="inclusion-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 3h12v11H6zM6 14v7M18 14v7M6 10h12"/></svg>
+        <ul class="tier-list">
+          <li class="tier-item">
+            <div class="tier-item-icon is-check">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
             </div>
-            <span class="inclusion-badge inclusion-badge--included">Included</span>
-          </div>
-          <h3 class="inclusion-title">Chairs</h3>
-          <p class="inclusion-desc">Comfortable, clean event chairs provided for all attendees up to our maximum salon capacity of 75 guests.</p>
-        </div>
+            <div class="tier-item-body">
+              <h4 class="tier-item-title">Tables</h4>
+              <p class="tier-item-desc">Round banquet dining tables and auxiliary buffet/cake tables arranged to fit your event plan.</p>
+            </div>
+          </li>
 
-        <!-- Tablecloths -->
-        <div class="inclusion-card">
-          <div class="inclusion-header">
-            <div class="inclusion-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 7l9-4 9 4v10l-9 4-9-4V7z"/><path d="M3 7l9 4 9-4"/><path d="M12 11v10"/></svg>
+          <li class="tier-item">
+            <div class="tier-item-icon is-check">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
             </div>
-            <span class="inclusion-badge inclusion-badge--included">Included</span>
-          </div>
-          <h3 class="inclusion-title">Tablecloths</h3>
-          <p class="inclusion-desc">Fresh, quality table linens included standard for all setup tables to give your reception a polished look.</p>
-        </div>
+            <div class="tier-item-body">
+              <h4 class="tier-item-title">Chairs</h4>
+              <p class="tier-item-desc">Comfortable seating provided for all attendees up to our maximum salon capacity of 75 guests.</p>
+            </div>
+          </li>
+
+          <li class="tier-item">
+            <div class="tier-item-icon is-check">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+            </div>
+            <div class="tier-item-body">
+              <h4 class="tier-item-title">Quality Table Linens</h4>
+              <p class="tier-item-desc">Fresh, clean tablecloths included standard for all setup tables to give your celebration a polished look.</p>
+            </div>
+          </li>
+        </ul>
       </div>
-    </div>
 
-    <!-- Group 2: Additional Services / Add-Ons -->
-    <div>
-      <h3 style="font-family:'Outfit',sans-serif;font-size:1.15rem;margin-bottom:14px;color:var(--gold);display:flex;align-items:center;gap:8px">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
-        <span>Additional Services (Available Extra Fee)</span>
-      </h3>
-      <div class="inclusions-grid">
-        <!-- Food Warmers -->
-        <div class="inclusion-card is-addon">
-          <div class="inclusion-header">
-            <div class="inclusion-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 14h18M4 18h16M7 21h10M12 3v3M8 6v3M16 6v3" stroke-linecap="round"/><path d="M4 14a8 8 0 0 1 16 0"/></svg>
-            </div>
-            <span class="inclusion-badge inclusion-badge--addon">Available Extra Fee</span>
+      <!-- Tier 2: Optional Add-Ons -->
+      <div class="tier-card tier-card--addons">
+        <div class="tier-header">
+          <div class="tier-badge-row">
+            <span class="tier-badge tier-badge--addon">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg>
+              <span>Optional Add-Ons</span>
+            </span>
           </div>
-          <h3 class="inclusion-title">Food Warmers</h3>
-          <p class="inclusion-desc">Commercial chafing dishes and warming stations to keep your catering and hot specialties at optimal temperature throughout your party.</p>
+          <h3 class="tier-title">Enhance Your Celebration</h3>
+          <p class="tier-subtitle">Tailored upgrades and specialty additions available upon request for an extra fee.</p>
         </div>
 
-        <!-- Sound System -->
-        <div class="inclusion-card is-addon">
-          <div class="inclusion-header">
-            <div class="inclusion-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="4" y="2" width="16" height="20" rx="3"/><circle cx="12" cy="14" r="4"/><circle cx="12" cy="7" r="1.5"/></svg>
+        <ul class="tier-list">
+          <li class="tier-item">
+            <div class="tier-item-icon is-plus">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg>
             </div>
-            <span class="inclusion-badge inclusion-badge--addon">Available Extra Fee</span>
-          </div>
-          <h3 class="inclusion-title">Sound System</h3>
-          <p class="inclusion-desc">High-clarity party sound system ready to connect to your phone, tablet, or DJ playlist for seamless celebration music and toasts.</p>
-        </div>
+            <div class="tier-item-body">
+              <h4 class="tier-item-title">Commercial Food Warmers</h4>
+              <p class="tier-item-desc">Chafing dishes and hot warming stations to keep your catering at optimal temperature throughout your party.</p>
+            </div>
+          </li>
 
-        <!-- Table Decorations -->
-        <div class="inclusion-card is-addon">
-          <div class="inclusion-header">
-            <div class="inclusion-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 19h16M12 3v13M8 9l4-6 4 6M6 19a6 6 0 0 1 12 0"/></svg>
+          <li class="tier-item">
+            <div class="tier-item-icon is-plus">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg>
             </div>
-            <span class="inclusion-badge inclusion-badge--addon">Available Extra Fee</span>
-          </div>
-          <h3 class="inclusion-title">Table Decorations</h3>
-          <p class="inclusion-desc">Custom centerpiece arrangements, specialty table runners, and tailored table accents crafted to elevate your guest dining experience.</p>
-        </div>
+            <div class="tier-item-body">
+              <h4 class="tier-item-title">Party Sound System</h4>
+              <p class="tier-item-desc">High-clarity audio system with Bluetooth / AUX plug-and-play connectivity for music and toasts.</p>
+            </div>
+          </li>
 
-        <!-- Backdrops & Balloons -->
-        <div class="inclusion-card is-addon">
-          <div class="inclusion-header">
-            <div class="inclusion-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <li class="tier-item">
+            <div class="tier-item-icon is-plus">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg>
             </div>
-            <span class="inclusion-badge inclusion-badge--addon">Available Extra Fee</span>
-          </div>
-          <h3 class="inclusion-title">Backdrops &amp; Balloons</h3>
-          <p class="inclusion-desc">Custom balloon garlands, themed photo backdrops, and balloon arches created to match your party's color palette.</p>
-        </div>
+            <div class="tier-item-body">
+              <h4 class="tier-item-title">Custom Table Decor</h4>
+              <p class="tier-item-desc">Custom centerpiece arrangements, specialty runners, and tailored table accents crafted for your theme.</p>
+            </div>
+          </li>
+
+          <li class="tier-item">
+            <div class="tier-item-icon is-plus">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg>
+            </div>
+            <div class="tier-item-body">
+              <h4 class="tier-item-title">Backdrops &amp; Balloon Arches</h4>
+              <p class="tier-item-desc">Custom balloon garlands, themed photo backdrops, and balloon arches created to match your color palette.</p>
+            </div>
+          </li>
+        </ul>
       </div>
     </div>
 
@@ -269,7 +272,7 @@
     <div class="center" style="max-width:680px;margin:0 auto 36px">
       <span class="eyebrow">Celebrate With Us</span>
       <h2>Events &amp; Private Celebrations</h2>
-      <p style="font-size:.95rem;color:var(--gray-400)">Our hall adapts seamlessly to various cultural milestones, family reunions, and intimate receptions.</p>
+      <p class="section-lead-text">Our hall adapts seamlessly to various cultural milestones, family reunions, and intimate receptions.</p>
     </div>
 
     <div class="event-grid">
@@ -352,18 +355,18 @@
 <!-- Section 4: Venue Guidelines & Booking Details -->
 <section class="section section--off">
   <div class="wrap">
-    <div class="card" style="padding:36px;border-left:5px solid var(--gold);max-width:880px;margin:0 auto">
+    <div class="guidelines-card">
       <span class="eyebrow">Rental Information</span>
-      <h3 style="font-family:'Outfit',sans-serif;font-size:1.35rem;margin-bottom:18px">Venue Guidelines &amp; Important Notes</h3>
-      <div style="display:flex;flex-direction:column;gap:14px;font-size:.93rem;color:var(--gray-300)">
-        <p style="margin:0"><strong style="color:var(--white)">Strict Rental Hours &amp; Closing:</strong> Celebrations run from 5:00 PM with a strict closing time of 11:30 PM. All music, festivities, and guest departures must conclude promptly by 11:30 PM.</p>
-        <p style="margin:0"><strong style="color:var(--white)">Security Deposit:</strong> A security deposit is required upon reservation to confirm and hold your celebration date. Pricing and deposit terms are detailed upon booking inquiry.</p>
-        <p style="margin:0"><strong style="color:var(--white)">Hall Checkout &amp; Deposit Return Requirements:</strong> To receive your full deposit back, the hall must be returned in the exact same condition it was provided. All trash must be removed from the premises and all trash cans emptied, including the bathroom trash cans. Tables and chairs must be left organized.</p>
-        <p style="margin:0"><strong style="color:var(--white)">Decorations &amp; Surface Protection:</strong> All decorations MUST be removed from ceiling and walls. Using nails, staples, pins, or tacks is strictly prohibited as it damages surfaces or removes paint.</p>
-        <p style="margin:0"><strong style="color:var(--white)">Prohibited Items &amp; Damages:</strong> Fireworks or pyrotechnics of any kind are strictly prohibited on the property. Any damage to venue furniture, linens, walls, or equipment may result in partial or full loss of deposit.</p>
-        <p style="margin:0"><strong style="color:var(--white)">Deposit Inspection &amp; Refund:</strong> The security deposit will be returned promptly after a post-event inspection of the property, provided all rental conditions are met.</p>
-        <p style="margin:0"><strong style="color:var(--white)">Included Amenities &amp; Additional Services:</strong> Every hall rental includes setup tables, chairs, and fresh tablecloths. Additional services—including commercial food warmers, party sound system, custom table decorations, and themed balloon backdrops—are available upon request for an extra price.</p>
-        <p style="margin:0"><strong style="color:var(--white)">Guest Capacity &amp; Catering:</strong> Our salon comfortably accommodates up to 75 guests maximum for safety and fire code compliance. Hosts are welcome to bring outside catering, homemade dishes, celebration cakes, and refreshments.</p>
+      <h3 class="guidelines-title">Venue Guidelines &amp; Important Notes</h3>
+      <div class="guidelines-list">
+        <p class="guidelines-item"><strong>Strict Rental Hours &amp; Closing:</strong> Celebrations run from 5:00 PM with a strict closing time of 11:30 PM. All music, festivities, and guest departures must conclude promptly by 11:30 PM.</p>
+        <p class="guidelines-item"><strong>Security Deposit:</strong> A security deposit is required upon reservation to confirm and hold your celebration date. Pricing and deposit terms are detailed upon booking inquiry.</p>
+        <p class="guidelines-item"><strong>Hall Checkout &amp; Deposit Return Requirements:</strong> To receive your full deposit back, the hall must be returned in the exact same condition it was provided. All trash must be removed from the premises and all trash cans emptied, including the bathroom trash cans. Tables and chairs must be left organized.</p>
+        <p class="guidelines-item"><strong>Decorations &amp; Surface Protection:</strong> All decorations MUST be removed from ceiling and walls. Using nails, staples, pins, or tacks is strictly prohibited as it damages surfaces or removes paint.</p>
+        <p class="guidelines-item"><strong>Prohibited Items &amp; Damages:</strong> Fireworks or pyrotechnics of any kind are strictly prohibited on the property. Any damage to venue furniture, linens, walls, or equipment may result in partial or full loss of deposit.</p>
+        <p class="guidelines-item"><strong>Deposit Inspection &amp; Refund:</strong> The security deposit will be returned promptly after a post-event inspection of the property, provided all rental conditions are met.</p>
+        <p class="guidelines-item"><strong>Included Amenities &amp; Additional Services:</strong> Every hall rental includes setup tables, chairs, and fresh tablecloths. Additional services—including commercial food warmers, party sound system, custom table decorations, and themed balloon backdrops—are available upon request for an extra price.</p>
+        <p class="guidelines-item"><strong>Guest Capacity &amp; Catering:</strong> Our salon comfortably accommodates up to 75 guests maximum for safety and fire code compliance. Hosts are welcome to bring outside catering, homemade dishes, celebration cakes, and refreshments.</p>
       </div>
     </div>
   </div>
@@ -373,7 +376,7 @@
 <section class="cta-band">
   <div class="wrap" style="padding-top:20px">
     <h2>Questions or Looking to Check a Date?</h2>
-    <p style="color:var(--gray-400);max-width:540px;margin:0 auto 24px">Contact us directly to discuss your desired celebration date and schedule a walkthrough.</p>
+    <p class="cta-band-desc">Contact us directly to discuss your desired celebration date and schedule a walkthrough.</p>
     <a href="contact.html" class="btn btn--gold">Inquire About Booking</a>
   </div>
 </section>
@@ -431,14 +434,6 @@
 <a href="contact.html" class="floating-contact" aria-label="Message JVL Venue">
   <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
 </a>
-
-<!-- Floating Quick Theme Switcher Pill (Instant Day/Night Client Pitch Toggle) -->
-<div class="theme-floating-switcher" id="themeFloatingSwitcher">
-  <button type="button" class="theme-float-btn" aria-label="Toggle site theme">
-    <span class="theme-float-icon">☀️</span>
-    <span class="theme-float-text">Preview Light Mode</span>
-  </button>
-</div>
 
 <script src="script.js"></script>
 </body>
