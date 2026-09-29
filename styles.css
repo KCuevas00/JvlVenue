@@ -974,7 +974,10 @@ nav.main-nav a:hover,nav.main-nav a.active{border-color:var(--gold);color:var(--
   display:grid;
   grid-template-columns:repeat(4, 1fr);
   gap:20px;
-  margin-top:28px;
+  margin-top:16px;
+}
+.inclusions-grid--3{
+  grid-template-columns:repeat(3, 1fr);
 }
 .inclusion-card{
   background:#171717;
@@ -1112,11 +1115,13 @@ nav.main-nav a:hover,nav.main-nav a.active{border-color:var(--gold);color:var(--
   margin-top:2px;
 }
 @media (max-width:960px){
-  .inclusions-grid{grid-template-columns:repeat(2, 1fr)}
+  .inclusions-grid,
+  .inclusions-grid--3{grid-template-columns:repeat(2, 1fr)}
   .specs-bar{grid-template-columns:repeat(2, 1fr);gap:20px}
 }
 @media (max-width:540px){
-  .inclusions-grid{grid-template-columns:1fr}
+  .inclusions-grid,
+  .inclusions-grid--3{grid-template-columns:1fr}
   .specs-bar{grid-template-columns:1fr;gap:18px;padding:20px}
 }
 

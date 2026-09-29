@@ -668,7 +668,7 @@ document.addEventListener('DOMContentLoaded', function () {
       ];
 
       var faqAnswersEsHtml = [
-        '<p>Cada reservación del salón incluye el montaje de mesas, sillas cómodas y manteles limpios para hasta 75 invitados. También disfruta de acceso privado al salón interior climatizado y baños privados. La decoración personalizada (arcos de globos, fondos temáticos, centros de mesa) está disponible como un servicio opcional por un costo adicional.</p>',
+        '<p>Cada reservación del salón incluye el montaje de mesas, sillas cómodas y manteles limpios para hasta 75 invitados. También disfruta de acceso privado al salón interior climatizado y baños privados. Los servicios adicionales disponibles por costo extra incluyen calentadores de comida comerciales, sistema de sonido para fiestas, decoración personalizada de mesas, arcos de globos y fondos fotográficos temáticos.</p>',
         '<p>Cada evento se cotiza de forma individual según el tipo de celebración, la fecha (días de semana vs. fines de semana) y sus necesidades de montaje. En lugar de paquetes rígidos, ofrecemos cotizaciones personalizadas para que solo pague por lo que su fiesta realmente necesita.</p>',
         '<p>Nuestro horario regular de celebración es de 5:00 PM a una hora estricta de cierre a las 11:30 PM. Conforme a las normas del contrato, toda la música, festejo y salida de invitados debe concluir puntualmente a las 11:30 PM. Contáctenos para coordinar el acceso para montaje y la disponibilidad de fechas.</p>',
         '<p>Sí, se requiere un depósito de seguridad al reservar para asegurar su fecha. Para recibir el reembolso total del depósito, el salón debe entregarse en las mismas condiciones en que fue proporcionado y cumplir con todas las normas del contrato:</p><ul style="margin:10px 0 6px 18px;padding:0;display:flex;flex-direction:column;gap:6px;line-height:1.55"><li><strong>Hora Estricta de Cierre:</strong> Hora de cierre obligatoria a las 11:30 PM con todos los invitados fuera de las instalaciones.</li><li><strong>Retiro de Basura:</strong> Toda la basura debe retirarse de las instalaciones y todos los botes vaciarse, incluidos los botes de los baños.</li><li><strong>Mesas y Sillas:</strong> Las mesas y sillas deben dejarse organizadas.</li><li><strong>Decoraciones:</strong> Todas las decoraciones DEBEN ser retiradas de techos y paredes. Está estrictamente prohibido usar clavos, grapas, chinches o tachuelas ya que dañan las superficies o desprenden la pintura.</li><li><strong>Sin Pirotecnia:</strong> Los fuegos artificiales no están permitidos en ningún lugar de la propiedad.</li><li><strong>Devolución del Depósito:</strong> Cualquier daño a mobiliario, mantelería, paredes o equipo puede resultar en la pérdida parcial o total del depósito. El depósito será reembolsado tras la inspección de la propiedad, siempre que se hayan cumplido las condiciones.</li></ul>',
@@ -689,18 +689,83 @@ document.addEventListener('DOMContentLoaded', function () {
       });
     }
 
-    // 10. Venue.html inclusions & guidelines
+    // 10. Venue.html inclusions & additional services
     var incCards = document.querySelectorAll('.inclusion-card');
     if (incCards.length >= 4) {
-      var incTitles = isEs ? ['Mesas', 'Sillas', 'Manteles', 'Decoraciones'] : ['Tables', 'Chairs', 'Tablecloths', 'Decorations'];
-      var incBadges = isEs ? ['Incluido', 'Incluido', 'Incluido', 'Disponible Costo Extra'] : ['Included', 'Included', 'Included', 'Available Extra Fee'];
+      var incTitles = isEs ? [
+        'Mesas',
+        'Sillas',
+        'Manteles',
+        'Calentadores de Comida',
+        'Sistema de Sonido',
+        'Decoración de Mesas',
+        'Fondos y Globos'
+      ] : [
+        'Tables',
+        'Chairs',
+        'Tablecloths',
+        'Food Warmers',
+        'Sound System',
+        'Table Decorations',
+        'Backdrops & Balloons'
+      ];
+      var incBadges = isEs ? [
+        'Incluido',
+        'Incluido',
+        'Incluido',
+        'Disponible Costo Extra',
+        'Disponible Costo Extra',
+        'Disponible Costo Extra',
+        'Disponible Costo Extra'
+      ] : [
+        'Included',
+        'Included',
+        'Included',
+        'Available Extra Fee',
+        'Available Extra Fee',
+        'Available Extra Fee',
+        'Available Extra Fee'
+      ];
+      var incDescs = isEs ? [
+        'Mesas redondas para banquete y mesas auxiliares para pastel/comida, acomodadas cómodamente según el plano de su fiesta.',
+        'Sillas cómodas y limpias provistas para todos los asistentes hasta la capacidad máxima de 75 invitados.',
+        'Mantelería limpia y de calidad incluida de manera estándar para todas las mesas montadas.',
+        'Chafers y estaciones térmicas comerciales para mantener sus platillos de banquete o comida casera calientes durante todo el evento.',
+        'Equipo de audio de alta fidelidad listo para conectar su teléfono, tableta o lista de reproducción para música y brindis.',
+        'Centros de mesa personalizados, caminos de mesa elegantes y detalles decorativos diseñados para realzar cada mesa.',
+        'Arcos de globos personalizados, guirnaldas y escenarios fotográficos temáticos adaptados a los colores de su evento.'
+      ] : [
+        'Round banquet dining tables and auxiliary food/cake tables arranged comfortably to fit your celebration\'s floor plan.',
+        'Comfortable, clean event chairs provided for all attendees up to our maximum salon capacity of 75 guests.',
+        'Fresh, quality table linens included standard for all setup tables to give your reception a polished look.',
+        'Commercial chafing dishes and warming stations to keep your catering and hot specialties at optimal temperature throughout your party.',
+        'High-clarity party sound system ready to connect to your phone, tablet, or DJ playlist for seamless celebration music and toasts.',
+        'Custom centerpiece arrangements, specialty table runners, and tailored table accents crafted to elevate your guest dining experience.',
+        'Custom balloon garlands, themed photo backdrops, and balloon arches created to match your party\'s color palette.'
+      ];
       incCards.forEach(function (inc, idx) {
         var t = inc.querySelector('.inclusion-title');
         var b = inc.querySelector('.inclusion-badge');
+        var d = inc.querySelector('.inclusion-desc');
         if (t && incTitles[idx]) t.textContent = incTitles[idx];
         if (b && incBadges[idx]) b.textContent = incBadges[idx];
+        if (d && incDescs[idx]) d.textContent = incDescs[idx];
       });
     }
+
+    // Venue.html Group Headers
+    document.querySelectorAll('.wrap > div > h3').forEach(function (h3) {
+      var span = h3.querySelector('span');
+      if (span) {
+        if (!span.getAttribute('data-en')) span.setAttribute('data-en', span.textContent.trim());
+        var en = span.getAttribute('data-en');
+        if (en === 'Included Standard With Every Rental') {
+          span.textContent = isEs ? 'Incluido de Manera Estándar con Cada Renta' : en;
+        } else if (en === 'Additional Services (Available Extra Fee)') {
+          span.textContent = isEs ? 'Servicios Adicionales (Disponibles con Costo Extra)' : en;
+        }
+      }
+    });
 
     // Venue.html Specs Bar
     var specItems = document.querySelectorAll('.spec-item');
@@ -737,7 +802,7 @@ document.addEventListener('DOMContentLoaded', function () {
           '<strong style="color:var(--white)">Decoraciones y Cuidado de Superficies:</strong> Todas las decoraciones DEBEN retirarse de techos y paredes. Está estrictamente prohibido usar clavos, grapas, chinches o tachuelas ya que dañan las superficies o arrancan la pintura.',
           '<strong style="color:var(--white)">Artículos Prohibidos y Daños:</strong> La pirotecnia y fuegos artificiales de cualquier tipo están estrictamente prohibidos en la propiedad. Cualquier daño al mobiliario, manteles, paredes o equipo del salón puede resultar en la retención parcial o total del depósito.',
           '<strong style="color:var(--white)">Inspección y Reembolso:</strong> El depósito de seguridad será devuelto oportunamente después de la inspección posterior al evento, siempre que se hayan cumplido todas las condiciones de renta.',
-          '<strong style="color:var(--white)">Comodidades Incluidas:</strong> Cada renta incluye mesas, sillas y manteles limpios. Arreglos y decoraciones personalizadas (fondos fotográficos, arcos de globos) están disponibles con costo extra bajo solicitud.',
+          '<strong style="color:var(--white)">Comodidades Incluidas y Servicios Adicionales:</strong> Cada renta incluye mesas, sillas y manteles limpios. Los servicios adicionales —incluyendo calentadores de comida comerciales, sistema de sonido para fiestas, decoración personalizada de mesas y fondos temáticos con globos— están disponibles con costo extra bajo solicitud.',
           '<strong style="color:var(--white)">Capacidad de Invitados y Banquete:</strong> Nuestro salón alberga cómodamente hasta un máximo de 75 invitados para seguridad y cumplimiento de normativas. Los anfitriones pueden traer comida externa, platillos familiares, pastel y bebidas.'
         ];
         vgPs.forEach(function (p, idx) {
@@ -747,6 +812,21 @@ document.addEventListener('DOMContentLoaded', function () {
           }
         });
       }
+    }
+
+    // Contact.html Additional Services Checkboxes Translation
+    document.querySelectorAll('.field--full > label').forEach(function (lbl) {
+      if (lbl.textContent.indexOf('Additional Services') !== -1 || lbl.textContent.indexOf('Servicios Adicionales') !== -1) {
+        lbl.textContent = isEs ? 'Servicios Adicionales Solicitados (Opcionales)' : 'Additional Services Requested (Optional Add-Ons)';
+      }
+    });
+    var addonChecks = document.querySelectorAll('input[name^="addon_"]');
+    if (addonChecks.length >= 4) {
+      var addonLabels = isEs ? ['Calentadores de Comida', 'Sistema de Sonido', 'Decoración de Mesas', 'Globos y Fondos'] : ['Food Warmers', 'Sound System', 'Table Decorations', 'Balloons & Backdrops'];
+      addonChecks.forEach(function (chk, idx) {
+        var span = chk.nextElementSibling;
+        if (span && addonLabels[idx]) span.textContent = addonLabels[idx];
+      });
     }
 
     // 10.5 Phone Sub-labels (Text Only / Solo texto)
