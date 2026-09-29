@@ -34,13 +34,13 @@
 *,*::before,*::after{box-sizing:border-box}
 html{
   scroll-behavior:smooth;
-  background-color:#0d0d0d;
+  background-color:#FAF9F5;
 }
 body{
   margin:0;
-  overflow-x:hidden;
-  background:#0d0d0d;
-  color:#f0f0f0;
+  overflow-x:clip;
+  background:#FAF9F5;
+  color:#111111;
   font-family:'Outfit',sans-serif;
   font-size:15px;
   line-height:1.6;
@@ -1574,7 +1574,7 @@ nav.main-nav a:hover,nav.main-nav a.active{border-color:var(--gold);color:var(--
 
 /* ---------- Footer ---------- */
 footer.site{background:var(--ink);color:var(--gray-400);border-top:1px solid rgba(255,255,255,.08)}
-footer.site .wrap{padding-top:64px;padding-bottom:calc(28px + env(safe-area-inset-bottom, 0px))}
+footer.site .wrap{padding-top:64px;padding-bottom:32px}
 .footer-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1.2fr;gap:36px;padding-bottom:40px}
 .footer-grid h4{color:var(--white);font-family:'Outfit',sans-serif;font-size:.85rem;margin-bottom:16px;letter-spacing:.03em}
 .footer-brand{display:flex;align-items:center;gap:10px;margin-bottom:14px}
