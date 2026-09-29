@@ -20,8 +20,8 @@ A responsive, high-end website for **JVL Venue** — an intimate salon and recep
 ## Contact Information:
 1. **Phone Number**: `(331) 330-1259` (Text only, links to `sms:+13313301259`).
 2. **Email Address**: `jvlvenue@gmail.com`.
-3. **Facebook Link**: `[https://www.facebook.com/placeholder]`.
-4. **Instagram Link**: `[https://www.instagram.com/placeholder]`.
+3. **Facebook Link**: `https://www.facebook.com`.
+4. **Instagram Link**: `https://www.instagram.com`.
 5. **Address**: `[Plano, IL 60545]`. Add street address when ready.
 
 ## Client Specifications & Confirmed Operations (Sep 2026)
