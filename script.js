@@ -952,7 +952,6 @@ document.addEventListener('DOMContentLoaded', function () {
       var smsSub = smsPromptCard.querySelector('.sms-prompt-sub');
       var smsBody = smsPromptCard.querySelector('.sms-prompt-body');
       var smsBtnSend = smsPromptCard.querySelector('.sms-btn-send span');
-      var smsBtnForm = smsPromptCard.querySelector('.sms-btn-form span');
 
       if (smsTitle) smsTitle.textContent = 'JVL Venue';
       if (smsSub) smsSub.textContent = isEs ? '(Solo Texto) · (331) 330-1259' : '(Text Only) · (331) 330-1259';
@@ -962,7 +961,6 @@ document.addEventListener('DOMContentLoaded', function () {
           : 'Would you like to send a direct text message to our venue coordinator at <strong>(331) 330-1259</strong> to check dates or ask questions?';
       }
       if (smsBtnSend) smsBtnSend.textContent = isEs ? 'Enviar Mensaje de Texto' : 'Send Text Message';
-      if (smsBtnForm) smsBtnForm.innerHTML = isEs ? 'O use el formulario de consulta &rarr;' : 'Or use inquiry form &rarr;';
     }
 
     try {
@@ -1004,11 +1002,6 @@ document.addEventListener('DOMContentLoaded', function () {
         sessionStorage.setItem('jvl_sms_dismissed', 'true');
       } catch (e) {}
     }
-
-    smsBtn.addEventListener('click', function (e) {
-      e.stopPropagation();
-      smsCard.classList.toggle('open');
-    });
 
     if (smsClose) {
       smsClose.addEventListener('click', function (e) {
