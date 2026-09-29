@@ -2118,13 +2118,24 @@ body.theme-light header.site:not(.scrolled) .header-cta .btn--white:hover{
   border-color:var(--gold-light) !important;
   color:#000000 !important;
 }
-body.theme-light header.site:not(.scrolled) .nav-toggle{
-  background:transparent;
-  border-color:rgba(0,0,0,.3);
-  color:#111111;
+/* Consistent hamburger menu across transparent & opaque navbar */
+body.theme-light .nav-toggle,
+body.theme-light header.site:not(.scrolled) .nav-toggle,
+body.theme-light header.site.scrolled .nav-toggle{
+  background:transparent !important;
+  border:1.5px solid rgba(0,0,0,.22) !important;
+  color:#111111 !important;
 }
-body.theme-light header.site:not(.scrolled) .nav-toggle-bar{
-  background:#111111;
+body.theme-light .nav-toggle:hover,
+body.theme-light header.site:not(.scrolled) .nav-toggle:hover,
+body.theme-light header.site.scrolled .nav-toggle:hover{
+  background:rgba(197,160,89,.15) !important;
+  border-color:var(--gold-dark) !important;
+}
+body.theme-light .nav-toggle-bar,
+body.theme-light header.site:not(.scrolled) .nav-toggle-bar,
+body.theme-light header.site.scrolled .nav-toggle-bar{
+  background:#111111 !important;
 }
 
 /* HOMEPAGE HERO: Keep Header over Video Hero in pristine Dark Mode when Unscrolled */
@@ -2184,16 +2195,6 @@ body.theme-light:has(.hero:not(.hero--small)) header.site:not(.scrolled) .header
   background:#ffffff !important;
   color:#000000 !important;
 }
-body.theme-light.page-home header.site:not(.scrolled) .nav-toggle,
-body.theme-light:has(.hero:not(.hero--small)) header.site:not(.scrolled) .nav-toggle{
-  background:rgba(255,255,255,.05) !important;
-  border-color:rgba(255,255,255,.2) !important;
-  color:var(--white) !important;
-}
-body.theme-light.page-home header.site:not(.scrolled) .nav-toggle-bar,
-body.theme-light:has(.hero:not(.hero--small)) header.site:not(.scrolled) .nav-toggle-bar{
-  background:var(--white) !important;
-}
 
 body.theme-light header.site.scrolled{
   background:rgba(255,255,255,.98);
@@ -2252,13 +2253,6 @@ body.theme-light header.site.scrolled .header-cta .btn--white:hover{
   background:var(--gold-dark) !important;
   border-color:var(--gold-dark) !important;
   color:#FFFFFF !important;
-}
-body.theme-light header.site.scrolled .nav-toggle{
-  background:transparent !important;
-  border-color:rgba(0,0,0,.2) !important;
-}
-body.theme-light header.site.scrolled .nav-toggle-bar{
-  background:#111111 !important;
 }
 
 /* Desktop Navbar in Light Mode - 100% transparent background on nav and links */
