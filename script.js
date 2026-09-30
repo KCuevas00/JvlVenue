@@ -914,6 +914,13 @@ document.addEventListener('DOMContentLoaded', function () {
       el.textContent = isEs ? '(Solo texto)' : '(Text Only)';
     });
 
+    // 10.8 Contact Form Submit Button
+    var formBtn = document.getElementById('form-submit-btn');
+    if (formBtn) {
+      if (!formBtn.getAttribute('data-en')) formBtn.setAttribute('data-en', formBtn.textContent.trim());
+      formBtn.textContent = isEs ? 'Enviar Consulta' : formBtn.getAttribute('data-en');
+    }
+
     // 11. CTA Band
     var ctaBandH2 = document.querySelector('.cta-band h2');
     var ctaBandP = document.querySelector('.cta-band p');
@@ -1019,6 +1026,64 @@ document.addEventListener('DOMContentLoaded', function () {
       if (e.key === 'Escape' && smsTooltip.classList.contains('open')) {
         closeSmsTooltip();
       }
+    });
+  }
+
+  // ---------- Web3Forms Contact Form AJAX Handler ----------
+  var contactForm = document.getElementById('contact-form');
+  var formResult = document.getElementById('form-result');
+  var formSubmitBtn = document.getElementById('form-submit-btn');
+
+  if (contactForm && formResult) {
+    contactForm.addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      var isEs = (document.documentElement.lang === 'es');
+      var originalBtnText = formSubmitBtn ? formSubmitBtn.textContent : (isEs ? 'Enviar Consulta' : 'Send Inquiry');
+
+      if (formSubmitBtn) {
+        formSubmitBtn.disabled = true;
+        formSubmitBtn.textContent = isEs ? 'Enviando…' : 'Sending…';
+      }
+
+      formResult.style.display = 'none';
+      formResult.className = 'form-result';
+      formResult.innerHTML = '';
+
+      var formData = new FormData(contactForm);
+
+      fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        body: formData
+      })
+      .then(function (response) {
+        return response.json();
+      })
+      .then(function (data) {
+        if (data && data.success) {
+          formResult.className = 'form-result form-result--success';
+          formResult.innerHTML = isEs
+            ? '<svg viewBox="0 0 24 24" width="22" height="22" stroke="currentColor" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;color:var(--gold)"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg><span><strong>¡Mensaje Enviado con Éxito!</strong> Gracias por comunicarse con JVL Venue. Nos pondremos en contacto con usted a la brevedad para coordinar su fecha.</span>'
+            : '<svg viewBox="0 0 24 24" width="22" height="22" stroke="currentColor" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;color:var(--gold)"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg><span><strong>Inquiry Sent Successfully!</strong> Thank you for reaching out to JVL Venue. We will be in touch shortly regarding your celebration date.</span>';
+          formResult.style.display = 'flex';
+          contactForm.reset();
+        } else {
+          var errorMsg = (data && data.message) ? data.message : (isEs ? 'Ocurrió un error al enviar el formulario. Por favor intente de nuevo o envíenos un texto al (331) 330-1259.' : 'Something went wrong. Please try again or text us at (331) 330-1259.');
+          formResult.className = 'form-result form-result--error';
+          formResult.innerHTML = '<svg viewBox="0 0 24 24" width="22" height="22" stroke="currentColor" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg><span>' + errorMsg + '</span>';
+          formResult.style.display = 'flex';
+        }
+      })
+      .catch(function (error) {
+        console.warn('Web3Forms fetch error, falling back to standard submit:', error);
+        contactForm.submit();
+      })
+      .finally(function () {
+        if (formSubmitBtn) {
+          formSubmitBtn.disabled = false;
+          formSubmitBtn.textContent = originalBtnText;
+        }
+      });
     });
   }
 

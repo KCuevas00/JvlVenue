@@ -155,12 +155,12 @@
     <div>
       <span class="eyebrow">Request Information</span>
       <h2>Inquire About Your Date</h2>
-      <form class="contact-form" action="https://formsubmit.co/jvlvenue@gmail.com" method="POST">
-        <!-- FormSubmit Configuration -->
-        <input type="hidden" name="_subject" value="New JVL Venue Booking Inquiry">
-        <input type="hidden" name="_template" value="table">
-        <input type="hidden" name="_captcha" value="false">
-        <input type="text" name="_honey" style="display:none">
+      <form class="contact-form" id="contact-form" action="https://api.web3forms.com/submit" method="POST">
+        <!-- Web3Forms Configuration -->
+        <input type="hidden" name="access_key" value="5e1e0787-78bf-4577-999f-ecd3407966f0">
+        <input type="hidden" name="subject" value="New JVL Venue Booking Inquiry">
+        <input type="hidden" name="from_name" value="JVL Venue Website">
+        <input type="checkbox" name="botcheck" class="hidden" style="display:none">
 
         <div>
           <label for="name">Full name</label>
@@ -215,7 +215,8 @@
           <label for="message">Tell us about your event</label>
           <textarea id="message" name="message" placeholder="Type of celebration, preferred times, setup questions, or any special requests..."></textarea>
         </div>
-        <button type="submit" class="btn btn--gold">Send Inquiry</button>
+        <div id="form-result" class="form-result" style="display:none;" role="status"></div>
+        <button type="submit" id="form-submit-btn" class="btn btn--gold">Send Inquiry</button>
       </form>
     </div>
   </div>

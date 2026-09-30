@@ -20,9 +20,12 @@ A responsive, high-end website for **JVL Venue** — an intimate salon and recep
 ## Contact Information:
 1. **Phone Number**: `(331) 330-1259` (Text only, links to `sms:+13313301259`).
 2. **Email Address**: `jvlvenue@gmail.com`.
-3. **Facebook Link**: `https://www.facebook.com`.
-4. **Instagram Link**: `https://www.instagram.com`.
-5. **Address**: `[Plano, IL 60545]`. Add street address when ready.
+3. **Contact Form Gateway**: Web3Forms (`https://api.web3forms.com/submit`)
+   - **Access Key**: `5e1e0787-78bf-4577-999f-ecd3407966f0`
+   - Handles booking requests directly to `jvlvenue@gmail.com` with AJAX async feedback and spam honeypot filtering.
+4. **Facebook Link**: `https://www.facebook.com`.
+5. **Instagram Link**: `https://www.instagram.com`.
+6. **Address**: `[Plano, IL 60545]`. Add street address when ready.
 
 ## Client Specifications & Confirmed Operations (Sep 2026)
 1. **Pricing Policy**: No prices displayed publicly on the website. All packages and bookings direct visitors to submit an inquiry for a personalized rate estimate.
